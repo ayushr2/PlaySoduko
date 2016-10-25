@@ -17,52 +17,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
 
@@ -73,52 +73,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
 
@@ -129,52 +129,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
     </LinearLayout>
@@ -191,52 +191,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
 
@@ -247,52 +247,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
 
@@ -303,52 +303,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
     </LinearLayout>
@@ -365,52 +365,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
 
@@ -421,52 +421,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
 
@@ -477,52 +477,52 @@
             android:rowCount="3"
             android:orientation="horizontal"
             android:background="@color/black"
-            android:padding="2dp"
+            android:padding="0.7dp"
             android:layout_weight="1">
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
-            <TextView
+            <EditText
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
-                android:background="@color/white"
+                android:background="@drawable/back"
                 />
         </GridLayout>
     </LinearLayout>
