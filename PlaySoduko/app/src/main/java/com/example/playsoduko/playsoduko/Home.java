@@ -32,8 +32,8 @@ public class Home extends AppCompatActivity {
         solveTab.setTabListener(new MyTabListener(solveFragment));
         playTab.setTabListener(new MyTabListener(playFragment));
 
-        actionBar.addTab(solveTab);
         actionBar.addTab(playTab);
+        actionBar.addTab(solveTab);
     }
 }
 
