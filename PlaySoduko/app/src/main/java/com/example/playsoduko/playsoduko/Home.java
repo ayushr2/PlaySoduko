@@ -1,17 +1,10 @@
 package com.example.playsoduko.playsoduko;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.Tab;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 
 public class Home extends AppCompatActivity {
 
@@ -19,58 +12,24 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Button playB = (Button)findViewById(R.id.playButton);
+        Button solveB = (Button)findViewById(R.id.solveButton);
+        final Intent intentPlay = new Intent(this,Play.class);
+        final Intent intentSolve = new Intent(this,Solve.class);
+        playB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intentPlay);
+            }
+        });
+        solveB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intentSolve);
+            }
+        });
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(actionBar.NAVIGATION_MODE_TABS);
-
-        Tab solveTab = actionBar.newTab().setText("Solve");
-        Tab playTab = actionBar.newTab().setText("Play");
-
-        Fragment solveFragment = new FragmentSolve();
-        Fragment playFragment = new FragmentPlay();
-
-        solveTab.setTabListener(new MyTabListener(solveFragment));
-        playTab.setTabListener(new MyTabListener(playFragment));
-
-        actionBar.addTab(playTab);
-        actionBar.addTab(solveTab);
     }
 }
 
-class MyTabListener implements ActionBar.TabListener {
-    Fragment fragment;
-
-    public MyTabListener(Fragment fragment) {
-        this.fragment = fragment;
-    }
-
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        ft.replace(R.id.container, fragment);
-    }
-
-    public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        ft.remove(fragment);
-    }
-
-    public void onTabReselected(Tab tab, FragmentTransaction ft) {
-        // nothing done here
-    }
-}
-
-
-class FragmentSolve extends Fragment {
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.solve_layout, container, false);
-        return view;
-    }
-}
-
-class FragmentPlay extends Fragment {
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.play_layout, container, false);
-        return view;
-    }
-}
 
