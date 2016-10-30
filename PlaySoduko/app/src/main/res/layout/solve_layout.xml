@@ -3,12 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="9">
+    android:weightSum="10">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="2.4"
         android:weightSum="3"
         android:orientation="horizontal">
         <LinearLayout
@@ -270,7 +270,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="2.4"
         android:weightSum="3"
         android:orientation="horizontal">
         <LinearLayout
@@ -532,7 +532,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="2.4"
         android:weightSum="3"
         android:orientation="horizontal">
         <LinearLayout
@@ -788,6 +788,44 @@
                     android:background="@drawable/back"
                     android:id="@+id/index88"/>
             </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.8"
+        android:weightSum="5"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Click cells to add digits. Once you have entred the Soduko, press GO to see the solved Soduko. Press CLEAR to refresh grid completely."/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:weightSum="2">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/green"
+                android:gravity="center"
+                android:id="@+id/gobutton"
+                android:text="Go"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@color/red"
+                android:id="@+id/clearbutton"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:text="Clear"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
