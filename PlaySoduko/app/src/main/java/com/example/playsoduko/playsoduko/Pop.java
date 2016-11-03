@@ -3,6 +3,7 @@ package com.example.playsoduko.playsoduko;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -38,34 +39,35 @@ public class Pop extends Activity{
         Button num9 = (Button) findViewById(R.id.nine);
         Button num0 = (Button) findViewById(R.id.zero);
 
-        int[] buttonDissapear = Soduko.buttonsNotAvailable(Solve.i,Solve.j);
-        for(int i = 0; i < buttonDissapear.length; i++){
-            switch (buttonDissapear[i]){
-                case 1:
+        String buttonDissapear = Soduko.buttonsNotAvailable(Solve.i,Solve.j);
+
+        for(int i = 0; i < buttonDissapear.length(); i++){
+            switch (buttonDissapear.charAt(i)){
+                case '1':
                     num1.setVisibility(View.INVISIBLE);
                     break;
-                case 2:
+                case '2':
                     num2.setVisibility(View.INVISIBLE);
                     break;
-                case 3:
+                case '3':
                     num3.setVisibility(View.INVISIBLE);
                     break;
-                case 4:
+                case '4':
                     num4.setVisibility(View.INVISIBLE);
                     break;
-                case 5:
+                case '5':
                     num5.setVisibility(View.INVISIBLE);
                     break;
-                case 6:
+                case '6':
                     num6.setVisibility(View.INVISIBLE);
                     break;
-                case 7:
+                case '7':
                     num7.setVisibility(View.INVISIBLE);
                     break;
-                case 8:
+                case '8':
                     num8.setVisibility(View.INVISIBLE);
                     break;
-                case 9:
+                case '9':
                     num9.setVisibility(View.INVISIBLE);
                     break;
                 default:

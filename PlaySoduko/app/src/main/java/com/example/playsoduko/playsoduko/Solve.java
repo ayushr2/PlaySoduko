@@ -46,13 +46,20 @@ public class Solve extends AppCompatActivity{
         return result;
     }
 
+    //REMOVE THIS
+    public static String testing1(int[] pass){
+        String result = "";
+        result += "[";
+        for(int i = 0; i < pass.length; i++){
+            result += "" + pass[i];
+        }
+        result += "]";
+        return result;
+    }
+
     public static void update(){
         if(CURRENT_BUTTON != null){
             soduko[i][j] = CURRENT_NUMBER;
-
-            //REMOVE THIS!!! JUST FOR TEST
-            Log.d("look here bro", testing(soduko));
-
             if(CURRENT_NUMBER == 0)
                 CURRENT_BUTTON.setText("");
             else
@@ -60,6 +67,9 @@ public class Solve extends AppCompatActivity{
         }
     }
 
+    public static void updateSolve(){
+        soduko[i][j] = CURRENT_NUMBER;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +158,98 @@ public class Solve extends AppCompatActivity{
         final Button b87 = (Button)findViewById(R.id.index87);
         final Button b88 = (Button)findViewById(R.id.index88);
         final Button clearB = (Button)findViewById(R.id.clearbutton);
+        final Button solveB = (Button)findViewById(R.id.gobutton);
+
+        solveB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Soduko.solveSoduko();
+                if(Soduko.solved){
+                    b00.setText("" + soduko[0][0]);
+                    b01.setText("" + soduko[0][1]);
+                    b02.setText("" + soduko[0][2]);
+                    b03.setText("" + soduko[0][3]);
+                    b04.setText("" + soduko[0][4]);
+                    b05.setText("" + soduko[0][5]);
+                    b06.setText("" + soduko[0][6]);
+                    b07.setText("" + soduko[0][7]);
+                    b08.setText("" + soduko[0][8]);
+                    b10.setText("" + soduko[1][0]);
+                    b11.setText("" + soduko[1][1]);
+                    b12.setText("" + soduko[1][2]);
+                    b13.setText("" + soduko[1][3]);
+                    b14.setText("" + soduko[1][4]);
+                    b15.setText("" + soduko[1][5]);
+                    b16.setText("" + soduko[1][6]);
+                    b17.setText("" + soduko[1][7]);
+                    b18.setText("" + soduko[1][8]);
+                    b20.setText("" + soduko[2][0]);
+                    b21.setText("" + soduko[2][1]);
+                    b22.setText("" + soduko[2][2]);
+                    b23.setText("" + soduko[2][3]);
+                    b24.setText("" + soduko[2][4]);
+                    b25.setText("" + soduko[2][5]);
+                    b26.setText("" + soduko[2][6]);
+                    b27.setText("" + soduko[2][7]);
+                    b28.setText("" + soduko[2][8]);
+                    b30.setText("" + soduko[3][0]);
+                    b31.setText("" + soduko[3][1]);
+                    b32.setText("" + soduko[3][2]);
+                    b33.setText("" + soduko[3][3]);
+                    b34.setText("" + soduko[3][4]);
+                    b35.setText("" + soduko[3][5]);
+                    b36.setText("" + soduko[3][6]);
+                    b37.setText("" + soduko[3][7]);
+                    b38.setText("" + soduko[3][8]);
+                    b40.setText("" + soduko[4][0]);
+                    b41.setText("" + soduko[4][1]);
+                    b42.setText("" + soduko[4][2]);
+                    b43.setText("" + soduko[4][3]);
+                    b44.setText("" + soduko[4][4]);
+                    b45.setText("" + soduko[4][5]);
+                    b46.setText("" + soduko[4][6]);
+                    b47.setText("" + soduko[4][7]);
+                    b48.setText("" + soduko[4][8]);
+                    b50.setText("" + soduko[5][0]);
+                    b51.setText("" + soduko[5][1]);
+                    b52.setText("" + soduko[5][2]);
+                    b53.setText("" + soduko[5][3]);
+                    b54.setText("" + soduko[5][4]);
+                    b55.setText("" + soduko[5][5]);
+                    b56.setText("" + soduko[5][6]);
+                    b57.setText("" + soduko[5][7]);
+                    b58.setText("" + soduko[5][8]);
+                    b60.setText("" + soduko[6][0]);
+                    b61.setText("" + soduko[6][1]);
+                    b62.setText("" + soduko[6][2]);
+                    b63.setText("" + soduko[6][3]);
+                    b64.setText("" + soduko[6][4]);
+                    b65.setText("" + soduko[6][5]);
+                    b66.setText("" + soduko[6][6]);
+                    b67.setText("" + soduko[6][7]);
+                    b68.setText("" + soduko[6][8]);
+                    b70.setText("" + soduko[7][0]);
+                    b71.setText("" + soduko[7][1]);
+                    b72.setText("" + soduko[7][2]);
+                    b73.setText("" + soduko[7][3]);
+                    b74.setText("" + soduko[7][4]);
+                    b75.setText("" + soduko[7][5]);
+                    b76.setText("" + soduko[7][6]);
+                    b77.setText("" + soduko[7][7]);
+                    b78.setText("" + soduko[7][8]);
+                    b80.setText("" + soduko[8][0]);
+                    b81.setText("" + soduko[8][1]);
+                    b82.setText("" + soduko[8][2]);
+                    b83.setText("" + soduko[8][3]);
+                    b84.setText("" + soduko[8][4]);
+                    b85.setText("" + soduko[8][5]);
+                    b86.setText("" + soduko[8][6]);
+                    b87.setText("" + soduko[8][7]);
+                    b88.setText("" + soduko[8][8]);
+                    Soduko.solved = false;
+                }
+            }
+        });
 
 
         b00.setOnClickListener(new View.OnClickListener() {
@@ -1060,7 +1162,5 @@ public class Solve extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-
     }
-
 }
