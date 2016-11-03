@@ -12,10 +12,13 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         Button playB = (Button)findViewById(R.id.playButton);
         Button solveB = (Button)findViewById(R.id.solveButton);
+
         final Intent intentPlay = new Intent(this,Play.class);
         final Intent intentSolve = new Intent(this,Solve.class);
+
         playB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
