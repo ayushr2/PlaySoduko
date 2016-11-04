@@ -141,7 +141,7 @@ public class Soduko {
                 }
             }
         }
-
+        int initialNumberOf0 = numberOf0;
         Log.d("number of zeroes", "" + numberOf0);
         while(numberOf0 > 0){
             for(int i = 0; i < 9 ; i++){
@@ -168,7 +168,7 @@ public class Soduko {
             Log.d("ANSWER!!!!!",Solve.testing(Solve.soduko));
 
             numOfReps++;
-            if(numOfReps > 81 && numberOf0 > 0){
+            if(numOfReps > initialNumberOf0 && numberOf0 > 0){
                 //cannot solve
                 Solve.soduko = initial;
                 return;

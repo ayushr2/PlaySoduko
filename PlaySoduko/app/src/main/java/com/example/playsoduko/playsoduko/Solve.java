@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class Solve extends AppCompatActivity{
@@ -247,6 +249,12 @@ public class Solve extends AppCompatActivity{
                     b87.setText("" + soduko[8][7]);
                     b88.setText("" + soduko[8][8]);
                     Soduko.solved = false;
+                }
+
+                else{
+                    Toast toast = Toast.makeText(Solve.this, "This Soduko does not have a unique solution!", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
             }
         });
