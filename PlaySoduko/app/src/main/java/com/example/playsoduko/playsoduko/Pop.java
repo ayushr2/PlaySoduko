@@ -39,7 +39,7 @@ public class Pop extends Activity{
         Button num9 = (Button) findViewById(R.id.nine);
         Button num0 = (Button) findViewById(R.id.zero);
 
-        String buttonDissapear = Soduko.buttonsNotAvailable(Solve.i,Solve.j);
+        String buttonDissapear = Soduko.buttonsNotAvailable(Solve.soduko, Solve.i,Solve.j);
 
         for(int i = 0; i < buttonDissapear.length(); i++){
             switch (buttonDissapear.charAt(i)){

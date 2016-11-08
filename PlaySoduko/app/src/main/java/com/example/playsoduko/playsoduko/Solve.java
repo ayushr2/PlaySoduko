@@ -165,7 +165,7 @@ public class Solve extends AppCompatActivity{
         solveB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Soduko.solveSoduko();
+                soduko = Soduko.solveSoduko(soduko);
                 if(Soduko.solved){
                     b00.setText("" + soduko[0][0]);
                     b01.setText("" + soduko[0][1]);
