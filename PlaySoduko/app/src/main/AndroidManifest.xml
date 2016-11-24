@@ -20,6 +20,7 @@
         <activity android:name=".Pop"
             android:theme="@style/AppTheme.keyPadCustom">
         </activity>
+        <activity android:name=".PlaySingle"></activity>
     </application>
 
 </manifest>

@@ -2,80 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/playBack"
-    android:weightSum="5">
+    android:background="@drawable/play_back"
+    android:weightSum="4">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Choose Difficulty"
         android:textAlignment="center"
         android:gravity="center"
-        android:textSize="45sp"
+        android:textSize="40sp"
         android:textColor="@color/white"
         android:layout_weight="1"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:layout_weight="1"
-        android:weightSum="5">
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/two"
-            android:id="@+id/two"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/four"
-            android:id="@+id/four"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_weight="1"
-        android:weightSum="5">
-        <Button
+        android:weightSum="6">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:id="@+id/seekBarText"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:gravity="center"/>
+        <SeekBar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/one"
-            android:background="@drawable/one"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/three"
-            android:background="@drawable/three"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/five"
-            android:background="@drawable/five"/>
+            android:id="@+id/seekBar"
+            android:max="4"/>
     </LinearLayout>
     <Space
         android:layout_width="match_parent"
@@ -101,6 +59,7 @@
             android:background="@color/transparent"
             android:textColor="@color/white"
             android:textSize="35sp"
+            android:id="@+id/playsingle"
             android:text="PLAY SINGLE"/>
     </LinearLayout>
 </LinearLayout>
