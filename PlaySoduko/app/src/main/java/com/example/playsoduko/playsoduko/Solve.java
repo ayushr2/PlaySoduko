@@ -7,7 +7,6 @@ package com.example.playsoduko.playsoduko;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -67,10 +66,6 @@ public class Solve extends AppCompatActivity{
             else
                 CURRENT_BUTTON.setText("" + CURRENT_NUMBER);
         }
-    }
-
-    public static void updateSolve(){
-        soduko[i][j] = CURRENT_NUMBER;
     }
 
     @Override
@@ -1170,5 +1165,21 @@ public class Solve extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        soduko = new int[][]{
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+        };
+        super.onBackPressed();
     }
 }

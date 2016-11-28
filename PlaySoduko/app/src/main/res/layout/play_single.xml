@@ -797,6 +797,25 @@
         android:layout_weight="2.8"
         android:weightSum="5"
         android:orientation="horizontal">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.1"
+            android:id="@+id/timer"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textAlignment="center"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:id="@+id/newGame"
+            android:text="new game"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.9"
+            android:id="@+id/newPuzzle"
+            android:text="new puzzle"/>
     </LinearLayout>
 </LinearLayout>

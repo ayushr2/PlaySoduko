@@ -3,17 +3,14 @@ package com.example.playsoduko.playsoduko;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-
-import java.io.Serializable;
-
 /**
- * Created by ayushranjan on 01/11/16.
+ * Created by ayushranjan on 27/11/16.
  */
-public class Pop extends Activity{
+
+public class PopSinglePlay extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +36,7 @@ public class Pop extends Activity{
         Button num9 = (Button) findViewById(R.id.nine);
         Button num0 = (Button) findViewById(R.id.zero);
 
-        String buttonDissapear = Soduko.buttonsNotAvailable(Solve.soduko, Solve.i,Solve.j);
+        String buttonDissapear = Soduko.buttonsNotAvailable(PlaySingle.soduko, PlaySingle.i,PlaySingle.j);
 
         for(int i = 0; i < buttonDissapear.length(); i++){
             switch (buttonDissapear.charAt(i)){
@@ -79,8 +76,8 @@ public class Pop extends Activity{
         num1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 1;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 1;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -89,8 +86,8 @@ public class Pop extends Activity{
         num2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 2;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 2;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -98,8 +95,8 @@ public class Pop extends Activity{
         num3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 3;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 3;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -107,8 +104,8 @@ public class Pop extends Activity{
         num4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 4;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 4;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -116,8 +113,8 @@ public class Pop extends Activity{
         num5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 5;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 5;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -126,8 +123,8 @@ public class Pop extends Activity{
         num6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 6;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 6;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -135,8 +132,8 @@ public class Pop extends Activity{
         num7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 7;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 7;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -145,8 +142,8 @@ public class Pop extends Activity{
         num8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 8;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 8;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -154,8 +151,8 @@ public class Pop extends Activity{
         num9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 9;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 9;
+                PlaySingle.update();
                 finish();
             }
         });
@@ -164,10 +161,11 @@ public class Pop extends Activity{
         num0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Solve.CURRENT_NUMBER = 0;
-                Solve.update();
+                PlaySingle.CURRENT_NUMBER = 0;
+                PlaySingle.update();
                 finish();
             }
         });
     }
 }
+

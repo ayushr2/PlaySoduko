@@ -21,6 +21,9 @@
             android:theme="@style/AppTheme.keyPadCustom">
         </activity>
         <activity android:name=".PlaySingle"></activity>
+        <activity android:name=".PopSinglePlay"
+            android:theme="@style/AppTheme.keyPadCustom">
+        </activity>
     </application>
 
 </manifest>
