@@ -1,5 +1,6 @@
 package com.example.playsoduko.playsoduko;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,22 +15,13 @@ import android.widget.TextView;
  * Created by ayushranjan on 24/11/16.
  */
 
-public class PlaySingle extends AppCompatActivity {
+public class PlaySingle extends Activity {
+    public static int drop;
     public static int CURRENT_NUMBER = 0;
     public static Button CURRENT_BUTTON = null;
     public static int i;
     public static int j;
-    public static int[][] soduko = new int[][]{
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-    };
+    public static int[][] soduko;
 
     public static void update(){
         if(CURRENT_BUTTON != null){
@@ -48,31 +40,36 @@ public class PlaySingle extends AppCompatActivity {
         Button newGame = (Button)findViewById(R.id.newGame);
         Button newPuzz = (Button)findViewById(R.id.newPuzzle);
 
-
+        soduko = Soduko.random();
         final Handler mHandler = new Handler();
-        int difficulty = getIntent().getIntExtra("difficulty", 1);
+        final int difficulty = getIntent().getIntExtra("difficulty", 1);
         final long startTime = System.currentTimeMillis() / 1000;
         final int timeAlloted;
         switch (difficulty) {
             case 1:
-                timeAlloted = 3600;
+                timeAlloted = 2280;
+                drop = 33;
                 updateTime(timeAlloted);
                 break;
             case 2:
-                timeAlloted = 3150;
+                timeAlloted = 2160;
+                drop = 34 + (int) (Math.random()*12);
                 updateTime(timeAlloted);
                 break;
             case 3:
-                timeAlloted = 2700;
+                timeAlloted = 2040;
+                drop = 46 + (int) (Math.random()*4);
                 updateTime(timeAlloted);
                 break;
             case 4:
-                timeAlloted = 2250;
+                timeAlloted = 1920;
+                drop = 50 + (int) (Math.random()*4);
                 updateTime(timeAlloted);
 
                 break;
             case 5:
                 timeAlloted = 1800;
+                drop = 54 + (int) (Math.random()*6);
                 updateTime(timeAlloted);
 
                 break;
@@ -80,6 +77,17 @@ public class PlaySingle extends AppCompatActivity {
                 timeAlloted = 0;
                 updateTime(0);
                 break;
+        }
+
+        for(int ind = 0; ind < drop; ind++){
+            int index1 = (int) (Math.random()*9);
+            int index2 = (int) (Math.random()*9);
+            if(soduko[index1][index2] == 0){
+                ind--;
+            }
+            else{
+                soduko[index1][index2] = 0;
+            }
         }
 
         Runnable updateTask = new Runnable() {
@@ -95,39 +103,22 @@ public class PlaySingle extends AppCompatActivity {
 
         mHandler.postDelayed(updateTask, 1000);
 
+
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soduko = new int[][]{
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                };
                 startActivity(new Intent(getApplicationContext(), Play.class));
+                finish();
             }
         });
 
         newPuzz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                soduko = new int[][]{
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                        {0,0,0,0,0,0,0,0,0},
-                };
-                startActivity(new Intent(getApplicationContext(), PlaySingle.class));
+                Intent intent = new Intent(getApplicationContext(), PlaySingle.class);
+                intent.putExtra("difficulty",difficulty);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -212,8 +203,411 @@ public class PlaySingle extends AppCompatActivity {
         final Button b86 = (Button)findViewById(R.id.index86);
         final Button b87 = (Button)findViewById(R.id.index87);
         final Button b88 = (Button)findViewById(R.id.index88);
-        final Button clearB = (Button)findViewById(R.id.clearbutton);
-        final Button solveB = (Button)findViewById(R.id.gobutton);
+
+        if(soduko[0][0] != 0){
+            b00.setText("" + soduko[0][0]);
+            b00.setEnabled(false);
+        }
+
+        if(soduko[0][1] != 0){
+            b01.setText("" + soduko[0][1]);
+            b01.setEnabled(false);
+        }
+
+        if(soduko[0][2] != 0){
+            b02.setText("" + soduko[0][2]);
+            b02.setEnabled(false);
+        }
+
+        if(soduko[0][3] != 0){
+            b03.setText("" + soduko[0][3]);
+            b03.setEnabled(false);
+        }
+
+        if(soduko[0][4] != 0){
+            b04.setText("" + soduko[0][4]);
+            b04.setEnabled(false);
+        }
+
+        if(soduko[0][5] != 0){
+            b05.setText("" + soduko[0][5]);
+            b05.setEnabled(false);
+        }
+
+        if(soduko[0][6] != 0){
+            b06.setText("" + soduko[0][6]);
+            b06.setEnabled(false);
+        }
+
+        if(soduko[0][7] != 0){
+            b07.setText("" + soduko[0][7]);
+            b07.setEnabled(false);
+        }
+
+        if(soduko[0][8] != 0){
+            b08.setText("" + soduko[0][8]);
+            b08.setEnabled(false);
+        }
+
+        if(soduko[1][0] != 0){
+            b10.setText("" + soduko[1][0]);
+            b10.setEnabled(false);
+        }
+
+        if(soduko[1][1] != 0){
+            b11.setText("" + soduko[1][1]);
+            b11.setEnabled(false);
+        }
+
+        if(soduko[1][2] != 0){
+            b12.setText("" + soduko[1][2]);
+            b12.setEnabled(false);
+        }
+
+        if(soduko[1][3] != 0){
+            b13.setText("" + soduko[1][3]);
+            b13.setEnabled(false);
+        }
+
+        if(soduko[1][4] != 0){
+            b14.setText("" + soduko[1][4]);
+            b14.setEnabled(false);
+        }
+
+        if(soduko[1][5] != 0){
+            b15.setText("" + soduko[1][5]);
+            b15.setEnabled(false);
+        }
+
+        if(soduko[1][6] != 0){
+            b16.setText("" + soduko[1][6]);
+            b16.setEnabled(false);
+        }
+
+        if(soduko[1][7] != 0){
+            b17.setText("" + soduko[1][7]);
+            b17.setEnabled(false);
+        }
+
+        if(soduko[1][8] != 0){
+            b18.setText("" + soduko[1][8]);
+            b18.setEnabled(false);
+        }
+
+        if(soduko[2][0] != 0){
+            b20.setText("" + soduko[2][0]);
+            b20.setEnabled(false);
+        }
+
+        if(soduko[2][1] != 0){
+            b21.setText("" + soduko[2][1]);
+            b21.setEnabled(false);
+        }
+
+        if(soduko[2][2] != 0){
+            b22.setText("" + soduko[2][2]);
+            b22.setEnabled(false);
+        }
+
+        if(soduko[2][3] != 0){
+            b23.setText("" + soduko[2][3]);
+            b23.setEnabled(false);
+        }
+
+        if(soduko[2][4] != 0){
+            b24.setText("" + soduko[2][4]);
+            b24.setEnabled(false);
+        }
+
+        if(soduko[2][5] != 0){
+            b25.setText("" + soduko[2][5]);
+            b25.setEnabled(false);
+        }
+
+        if(soduko[2][6] != 0){
+            b26.setText("" + soduko[2][6]);
+            b26.setEnabled(false);
+        }
+
+        if(soduko[2][7] != 0){
+            b27.setText("" + soduko[2][7]);
+            b27.setEnabled(false);
+        }
+
+        if(soduko[2][8] != 0){
+            b28.setText("" + soduko[2][8]);
+            b28.setEnabled(false);
+        }
+
+        if(soduko[3][0] != 0){
+            b30.setText("" + soduko[3][0]);
+            b30.setEnabled(false);
+        }
+
+        if(soduko[3][1] != 0){
+            b31.setText("" + soduko[3][1]);
+            b31.setEnabled(false);
+        }
+
+        if(soduko[3][2] != 0){
+            b32.setText("" + soduko[3][2]);
+            b32.setEnabled(false);
+        }
+
+        if(soduko[3][3] != 0){
+            b33.setText("" + soduko[3][3]);
+            b33.setEnabled(false);
+        }
+
+        if(soduko[3][4] != 0){
+            b34.setText("" + soduko[3][4]);
+            b34.setEnabled(false);
+        }
+
+        if(soduko[3][5] != 0){
+            b35.setText("" + soduko[3][5]);
+            b35.setEnabled(false);
+        }
+
+        if(soduko[3][6] != 0){
+            b36.setText("" + soduko[3][6]);
+            b36.setEnabled(false);
+        }
+
+        if(soduko[3][7] != 0){
+            b37.setText("" + soduko[3][7]);
+            b37.setEnabled(false);
+        }
+
+        if(soduko[3][8] != 0){
+            b38.setText("" + soduko[3][8]);
+            b38.setEnabled(false);
+        }
+
+        if(soduko[4][0] != 0){
+            b40.setText("" + soduko[4][0]);
+            b40.setEnabled(false);
+        }
+
+        if(soduko[4][1] != 0){
+            b41.setText("" + soduko[4][1]);
+            b41.setEnabled(false);
+        }
+
+        if(soduko[4][2] != 0){
+            b42.setText("" + soduko[4][2]);
+            b42.setEnabled(false);
+        }
+
+        if(soduko[4][3] != 0){
+            b43.setText("" + soduko[4][3]);
+            b43.setEnabled(false);
+        }
+
+        if(soduko[4][4] != 0){
+            b44.setText("" + soduko[4][4]);
+            b44.setEnabled(false);
+        }
+
+        if(soduko[4][5] != 0){
+            b45.setText("" + soduko[4][5]);
+            b45.setEnabled(false);
+        }
+
+        if(soduko[4][6] != 0){
+            b46.setText("" + soduko[4][6]);
+            b46.setEnabled(false);
+        }
+
+        if(soduko[4][7] != 0){
+            b47.setText("" + soduko[4][7]);
+            b47.setEnabled(false);
+        }
+
+        if(soduko[4][8] != 0){
+            b48.setText("" + soduko[4][8]);
+            b48.setEnabled(false);
+        }
+
+        if(soduko[5][0] != 0){
+            b50.setText("" + soduko[5][0]);
+            b50.setEnabled(false);
+        }
+
+        if(soduko[5][1] != 0){
+            b51.setText("" + soduko[5][1]);
+            b51.setEnabled(false);
+        }
+
+        if(soduko[5][2] != 0){
+            b52.setText("" + soduko[5][2]);
+            b52.setEnabled(false);
+        }
+
+        if(soduko[5][3] != 0){
+            b53.setText("" + soduko[5][3]);
+            b53.setEnabled(false);
+        }
+
+        if(soduko[5][4] != 0){
+            b54.setText("" + soduko[5][4]);
+            b54.setEnabled(false);
+        }
+
+        if(soduko[5][5] != 0){
+            b55.setText("" + soduko[5][5]);
+            b55.setEnabled(false);
+        }
+
+        if(soduko[5][6] != 0){
+            b56.setText("" + soduko[5][6]);
+            b56.setEnabled(false);
+        }
+
+        if(soduko[5][7] != 0){
+            b57.setText("" + soduko[5][7]);
+            b57.setEnabled(false);
+        }
+
+        if(soduko[5][8] != 0){
+            b58.setText("" + soduko[5][8]);
+            b58.setEnabled(false);
+        }
+
+        if(soduko[6][0] != 0){
+            b60.setText("" + soduko[6][0]);
+            b60.setEnabled(false);
+        }
+
+        if(soduko[6][1] != 0){
+            b61.setText("" + soduko[6][1]);
+            b61.setEnabled(false);
+        }
+
+        if(soduko[6][2] != 0){
+            b62.setText("" + soduko[6][2]);
+            b62.setEnabled(false);
+        }
+
+        if(soduko[6][3] != 0){
+            b63.setText("" + soduko[6][3]);
+            b63.setEnabled(false);
+        }
+
+        if(soduko[6][4] != 0){
+            b64.setText("" + soduko[6][4]);
+            b64.setEnabled(false);
+        }
+
+        if(soduko[6][5] != 0){
+            b65.setText("" + soduko[6][5]);
+            b65.setEnabled(false);
+        }
+
+        if(soduko[6][6] != 0){
+            b66.setText("" + soduko[6][6]);
+            b66.setEnabled(false);
+        }
+
+        if(soduko[6][7] != 0){
+            b67.setText("" + soduko[6][7]);
+            b67.setEnabled(false);
+        }
+
+        if(soduko[6][8] != 0){
+            b68.setText("" + soduko[6][8]);
+            b68.setEnabled(false);
+        }
+
+        if(soduko[7][0] != 0){
+            b70.setText("" + soduko[7][0]);
+            b70.setEnabled(false);
+        }
+
+        if(soduko[7][1] != 0){
+            b71.setText("" + soduko[7][1]);
+            b71.setEnabled(false);
+        }
+
+        if(soduko[7][2] != 0){
+            b72.setText("" + soduko[7][2]);
+            b72.setEnabled(false);
+        }
+
+        if(soduko[7][3] != 0){
+            b73.setText("" + soduko[7][3]);
+            b73.setEnabled(false);
+        }
+
+        if(soduko[7][4] != 0){
+            b74.setText("" + soduko[7][4]);
+            b74.setEnabled(false);
+        }
+
+        if(soduko[7][5] != 0){
+            b75.setText("" + soduko[7][5]);
+            b75.setEnabled(false);
+        }
+
+        if(soduko[7][6] != 0){
+            b76.setText("" + soduko[7][6]);
+            b76.setEnabled(false);
+        }
+
+        if(soduko[7][7] != 0){
+            b77.setText("" + soduko[7][7]);
+            b77.setEnabled(false);
+        }
+
+        if(soduko[7][8] != 0){
+            b78.setText("" + soduko[7][8]);
+            b78.setEnabled(false);
+        }
+
+        if(soduko[8][0] != 0){
+            b80.setText("" + soduko[8][0]);
+            b80.setEnabled(false);
+        }
+
+        if(soduko[8][1] != 0){
+            b81.setText("" + soduko[8][1]);
+            b81.setEnabled(false);
+        }
+
+        if(soduko[8][2] != 0){
+            b82.setText("" + soduko[8][2]);
+            b82.setEnabled(false);
+        }
+
+        if(soduko[8][3] != 0){
+            b83.setText("" + soduko[8][3]);
+            b83.setEnabled(false);
+        }
+
+        if(soduko[8][4] != 0){
+            b84.setText("" + soduko[8][4]);
+            b84.setEnabled(false);
+        }
+
+        if(soduko[8][5] != 0){
+            b85.setText("" + soduko[8][5]);
+            b85.setEnabled(false);
+        }
+
+        if(soduko[8][6] != 0){
+            b86.setText("" + soduko[8][6]);
+            b86.setEnabled(false);
+        }
+
+        if(soduko[8][7] != 0){
+            b87.setText("" + soduko[8][7]);
+            b87.setEnabled(false);
+        }
+
+        if(soduko[8][8] != 0){
+            b88.setText("" + soduko[8][8]);
+            b88.setEnabled(false);
+        }
 
         b00.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1109,18 +1503,8 @@ public class PlaySingle extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        soduko = new int[][]{
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0},
-            };
-        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), Play.class));
+        finish();
     }
 
     public void updateTime(long time){

@@ -47,8 +47,13 @@ public class Play extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), PlaySingle.class);
                 intent.putExtra("difficulty", (seek.getProgress() + 1) );
                 startActivity(intent);
+                finish();
             }
         });
+    }
+
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), Home.class));
     }
 
 }

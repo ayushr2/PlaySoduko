@@ -16,11 +16,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".Play"></activity>
-        <activity android:name=".Solve"></activity>
+        <activity android:name=".Solve"
+            android:noHistory="true"></activity>
         <activity android:name=".Pop"
             android:theme="@style/AppTheme.keyPadCustom">
         </activity>
-        <activity android:name=".PlaySingle"></activity>
+        <activity android:name=".PlaySingle"
+            android:noHistory="true"></activity>
         <activity android:name=".PopSinglePlay"
             android:theme="@style/AppTheme.keyPadCustom">
         </activity>

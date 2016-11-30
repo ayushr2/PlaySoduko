@@ -462,4 +462,41 @@ public class Soduko {
         }
         return grid;
     }
+
+    public static int[][] random(){
+        int[][] puzzle = {{0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0}};
+        main : while(true){
+            trial : for(int i = 0; i < 9;i++){
+                for(int j = 0; j < 9; j++){
+                    String s = buttonsAvailable(puzzle,i,j);
+                    if(s.equals("")){
+                        int[][] nuzzle = {{0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0},
+                                {0,0,0,0,0,0,0,0,0}};
+                        puzzle = nuzzle;
+                        break trial;
+                    }
+                    int index = (int) (Math.random()*s.length());
+                    puzzle[i][j] = Integer.parseInt("" + s.charAt(index));
+                    if(i == 8 && j == 8)
+                        break main;
+                }
+            }
+        }
+        return puzzle;
+    }
 }
