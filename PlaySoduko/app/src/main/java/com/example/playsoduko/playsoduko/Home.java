@@ -31,7 +31,12 @@ public class Home extends AppCompatActivity {
                 startActivity(intentSolve);
             }
         });
+    }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        System.exit(0);
     }
 }
 

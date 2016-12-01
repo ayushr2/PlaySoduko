@@ -41,14 +41,13 @@ public class PlaySingle extends Activity {
         Button newPuzz = (Button)findViewById(R.id.newPuzzle);
 
         soduko = Soduko.random();
-        final Handler mHandler = new Handler();
         final int difficulty = getIntent().getIntExtra("difficulty", 1);
         final long startTime = System.currentTimeMillis() / 1000;
         final int timeAlloted;
         switch (difficulty) {
             case 1:
                 timeAlloted = 2280;
-                drop = 33;
+                drop = 1;
                 updateTime(timeAlloted);
                 break;
             case 2:
@@ -90,6 +89,7 @@ public class PlaySingle extends Activity {
             }
         }
 
+        final Handler mHandler = new Handler();
         Runnable updateTask = new Runnable() {
             @Override
             public void run() {
@@ -97,6 +97,17 @@ public class PlaySingle extends Activity {
                 if((timeAlloted - (currentTime - startTime) >= 0)){
                     updateTime(timeAlloted - (currentTime - startTime));
                     mHandler.postDelayed(this, 1000);
+                }
+                boolean complete = true;
+                for (int ind = 0; ind < 9; ind++){
+                    for (int ind2 = 0; ind2 < 9; ind2 ++){
+                        if (soduko[ind][ind2] == 0)
+                            complete = false;
+                    }
+                }
+
+                if(complete){
+                    //START NEW ACTIVITY
                 }
             }
         };
@@ -1499,6 +1510,7 @@ public class PlaySingle extends Activity {
                 startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -1520,33 +1532,13 @@ public class PlaySingle extends Activity {
             adb.setCancelable(false);
             adb.setPositiveButton("New Game", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    soduko = new int[][]{
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                    };
                     startActivity(new Intent(getApplicationContext(), Play.class));
+                    finish();
                 } });
             adb.setNegativeButton("Home Page", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    soduko = new int[][]{
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                            {0,0,0,0,0,0,0,0,0},
-                    };
                     startActivity(new Intent(getApplicationContext(), Home.class));
+                    finish();
                 } });
             adb.show();
         }
