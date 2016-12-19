@@ -26,6 +26,8 @@
         <activity android:name=".PopSinglePlay"
             android:theme="@style/AppTheme.keyPadCustom">
         </activity>
+        <activity android:name=".Win">
+        </activity>
     </application>
 
 </manifest>

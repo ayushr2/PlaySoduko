@@ -8,4 +8,7 @@
     <color name="green">#04FF14</color>
     <color name="red">#FF5414</color>
     <color name="transparent">#00ffffff</color>
+    <color name="cerulean">#007EA7</color>
+    <color name="vividCerulean">#00a8e8</color>
+    <color name="supervividCerulean">#00f8e8</color>
 </resources>

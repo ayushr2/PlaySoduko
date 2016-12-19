@@ -1,9 +1,6 @@
 package com.example.playsoduko.playsoduko;
 
 import android.util.Log;
-
-import java.util.Arrays;
-
 /**
  * Created by ayushranjan on 02/11/16.
  */

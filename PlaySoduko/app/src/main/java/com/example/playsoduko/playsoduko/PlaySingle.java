@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,7 +31,10 @@ public class PlaySingle extends Activity {
                 CURRENT_BUTTON.setText("" + CURRENT_NUMBER);
         }
     }
-    
+
+    final Handler mHandler = new Handler();
+    Runnable updateTask = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class PlaySingle extends Activity {
         switch (difficulty) {
             case 1:
                 timeAlloted = 2280;
-                drop = 1;
+                drop = 34;
                 updateTime(timeAlloted);
                 break;
             case 2:
@@ -88,9 +90,7 @@ public class PlaySingle extends Activity {
                 soduko[index1][index2] = 0;
             }
         }
-
-        final Handler mHandler = new Handler();
-        Runnable updateTask = new Runnable() {
+        updateTask = new Runnable() {
             @Override
             public void run() {
                 long currentTime = System.currentTimeMillis() / 1000;
@@ -107,11 +107,13 @@ public class PlaySingle extends Activity {
                 }
 
                 if(complete){
-                    //START NEW ACTIVITY
+                    updateTime(1800);
+                    Intent intent = new Intent(getApplicationContext(),Win.class);
+                    intent.putExtra("difficulty",difficulty);
+                    startActivity(intent);
                 }
             }
         };
-
         mHandler.postDelayed(updateTask, 1000);
 
 
@@ -1511,6 +1513,17 @@ public class PlaySingle extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacks(updateTask);
     }
 
     @Override
