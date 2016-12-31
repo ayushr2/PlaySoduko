@@ -35,8 +35,8 @@ public class Home extends Activity {
 
     @Override
     public void onBackPressed() {
-        finish();
         System.exit(0);
+        finish();
     }
 }
 

@@ -49,12 +49,12 @@ public class PlaySingle extends Activity {
         switch (difficulty) {
             case 1:
                 timeAlloted = 2280;
-                drop = 34;
+                drop = 36;
                 updateTime(timeAlloted);
                 break;
             case 2:
                 timeAlloted = 2160;
-                drop = 34 + (int) (Math.random()*12);
+                drop = 36 + (int) (Math.random()*8);
                 updateTime(timeAlloted);
                 break;
             case 3:
@@ -64,13 +64,13 @@ public class PlaySingle extends Activity {
                 break;
             case 4:
                 timeAlloted = 1920;
-                drop = 50 + (int) (Math.random()*4);
+                drop = 50 + (int) (Math.random()*3);
                 updateTime(timeAlloted);
 
                 break;
             case 5:
                 timeAlloted = 1800;
-                drop = 54 + (int) (Math.random()*6);
+                drop = 53 + (int) (Math.random()*3);
                 updateTime(timeAlloted);
 
                 break;
@@ -79,17 +79,20 @@ public class PlaySingle extends Activity {
                 updateTime(0);
                 break;
         }
-
+        int index1 = 0;
         for(int ind = 0; ind < drop; ind++){
-            int index1 = (int) (Math.random()*9);
             int index2 = (int) (Math.random()*9);
             if(soduko[index1][index2] == 0){
                 ind--;
             }
             else{
                 soduko[index1][index2] = 0;
+                index1++;
+                if(index1 >= 9)
+                    index1 = 0;
             }
         }
+        index1 = 0;
         updateTask = new Runnable() {
             @Override
             public void run() {

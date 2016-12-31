@@ -39,27 +39,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"/>
-    <LinearLayout
+    <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:weightSum="2">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            android:text="PLAY ONLINE"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            android:id="@+id/playsingle"
-            android:text="PLAY SINGLE"/>
-    </LinearLayout>
+        android:background="@color/transparent"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:id="@+id/playsingle"
+        android:text="PLAY!"/>
 </LinearLayout>
