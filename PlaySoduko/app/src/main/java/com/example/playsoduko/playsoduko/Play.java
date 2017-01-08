@@ -50,6 +50,17 @@ public class Play extends AppCompatActivity {
                 finish();
             }
         });
+
+        Button onlineB = (Button)findViewById(R.id.playonline);
+        onlineB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PlayOnline.class);
+                intent.putExtra("difficulty", (seek.getProgress() + 1) );
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void onBackPressed() {

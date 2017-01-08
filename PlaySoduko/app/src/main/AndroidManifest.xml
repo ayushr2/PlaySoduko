@@ -26,6 +26,11 @@
         <activity android:name=".PopSinglePlay"
             android:theme="@style/AppTheme.keyPadCustom">
         </activity>
+        <activity android:name=".PlayOnline"
+            android:noHistory="true"></activity>
+        <activity android:name=".PopOnlinePlay"
+            android:theme="@style/AppTheme.keyPadCustom">
+        </activity>
         <activity android:name=".Win">
         </activity>
     </application>
