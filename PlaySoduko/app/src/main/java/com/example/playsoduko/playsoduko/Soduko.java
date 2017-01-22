@@ -252,22 +252,16 @@ public class Soduko {
             for(int i = 0; i < 9 ; i++){
                 for(int j = 0; j < 9; j++){
                     if(grid[i][j] == 0) {
-                        String used = buttonsNotAvailable(grid, i, j);
+                        String used = buttonsAvailable(grid, i, j);
 
-                        if (used.length() == 8 && grid[i][j] == 0) {
-                            int sum = 0;
-                            for (int index = 0; index < used.length(); index++) {
-                                sum += Integer.parseInt("" + used.charAt(index));
-                            }
-                            grid[i][j] = 45 - sum;
-                            Log.d("CURRENT GRID", Solve.testing(grid));
+                        if (used.length() == 1 && grid[i][j] == 0) {
+                            grid[i][j] = Integer.parseInt("" + used.charAt(0));
+                            Log.d("1", Solve.testing(grid));
                             Log.d("I VALUE", "" + i);
                             Log.d("J VALUE", "" + j);
                             numberOf0--;
                             break;
                         }
-
-                        used = buttonsAvailable(grid, i, j);
 
                         if (grid[i][j] == 0) {
                             String[] compareColumn = {"a", "a", "a", "a", "a", "a", "a", "a", "a"};
@@ -286,6 +280,9 @@ public class Soduko {
                                         (compareColumn[7].indexOf(used.charAt(number)) < 0) &&
                                         (compareColumn[8].indexOf(used.charAt(number)) < 0)) {
                                     grid[i][j] = Integer.parseInt("" + used.charAt(number));
+                                    Log.d("2", Solve.testing(grid));
+                                    Log.d("I VALUE", "" + i);
+                                    Log.d("J VALUE", "" + j);
                                     numberOf0--;
                                     break;
                                 }
@@ -308,6 +305,9 @@ public class Soduko {
                                         (compareRow[7].indexOf(used.charAt(number)) < 0) &&
                                         (compareRow[8].indexOf(used.charAt(number)) < 0)) {
                                     grid[i][j] = Integer.parseInt("" + used.charAt(number));
+                                    Log.d("3", Solve.testing(grid));
+                                    Log.d("I VALUE", "" + i);
+                                    Log.d("J VALUE", "" + j);
                                     numberOf0--;
                                     break;
                                 }
@@ -321,7 +321,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 0; count1 < 3; count1++) {
                                     for (int count2 = 0; count2 < 3; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -333,7 +333,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 0; count1 < 3; count1++) {
                                     for (int count2 = 3; count2 < 6; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -345,7 +345,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 0; count1 < 3; count1++) {
                                     for (int count2 = 6; count2 < 9; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -357,7 +357,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 3; count1 < 6; count1++) {
                                     for (int count2 = 0; count2 < 3; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -369,7 +369,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 3; count1 < 6; count1++) {
                                     for (int count2 = 3; count2 < 6; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -381,7 +381,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 3; count1 < 6; count1++) {
                                     for (int count2 = 6; count2 < 9; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -393,7 +393,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 6; count1 < 9; count1++) {
                                     for (int count2 = 0; count2 < 3; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -405,7 +405,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 6; count1 < 9; count1++) {
                                     for (int count2 = 3; count2 < 6; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -417,7 +417,7 @@ public class Soduko {
                                 int count = 0;
                                 for (int count1 = 6; count1 < 9; count1++) {
                                     for (int count2 = 6; count2 < 9; count2++) {
-                                        if (grid[count1][count2] == 0 && count1 != i && count2 != j) {
+                                        if (grid[count1][count2] == 0 && (count1 != i || count2 != j)) {
                                             compareGrid[count] = buttonsAvailable(grid, count1, count2);
                                             count++;
                                         }
@@ -436,6 +436,9 @@ public class Soduko {
                                         (compareGrid[7].indexOf(used.charAt(number)) < 0) &&
                                         (compareGrid[8].indexOf(used.charAt(number)) < 0)) {
                                     grid[i][j] = Integer.parseInt("" + used.charAt(number));
+                                    Log.d("4", Solve.testing(grid));
+                                    Log.d("I VALUE", "" + i);
+                                    Log.d("J VALUE", "" + j);
                                     numberOf0--;
                                     break;
                                 }
@@ -449,7 +452,6 @@ public class Soduko {
                 solved = true;
                 return grid;
             }
-            Log.d("ANSWER!!!!!",Solve.testing(grid));
 
             numOfReps++;
             if(numOfReps > initialNumberOf0 && numberOf0 > 0){
