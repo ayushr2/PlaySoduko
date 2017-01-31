@@ -1,4 +1,4 @@
-package com.example.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,11 +1,11 @@
-package com.example.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko;
 
 /**
  * Created by ayushranjan on 30/10/16.
  */
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-public class Solve extends AppCompatActivity{
+public class Solve extends Activity{
 
     public static int CURRENT_NUMBER = 0;
     public static Button CURRENT_BUTTON = null;

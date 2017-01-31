@@ -1,6 +1,7 @@
-package com.example.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko;
 
 import android.util.Log;
+
 /**
  * Created by ayushranjan on 02/11/16.
  */
@@ -256,9 +257,6 @@ public class Soduko {
 
                         if (used.length() == 1 && grid[i][j] == 0) {
                             grid[i][j] = Integer.parseInt("" + used.charAt(0));
-                            Log.d("1", Solve.testing(grid));
-                            Log.d("I VALUE", "" + i);
-                            Log.d("J VALUE", "" + j);
                             numberOf0--;
                             break;
                         }
@@ -280,9 +278,6 @@ public class Soduko {
                                         (compareColumn[7].indexOf(used.charAt(number)) < 0) &&
                                         (compareColumn[8].indexOf(used.charAt(number)) < 0)) {
                                     grid[i][j] = Integer.parseInt("" + used.charAt(number));
-                                    Log.d("2", Solve.testing(grid));
-                                    Log.d("I VALUE", "" + i);
-                                    Log.d("J VALUE", "" + j);
                                     numberOf0--;
                                     break;
                                 }
@@ -305,9 +300,6 @@ public class Soduko {
                                         (compareRow[7].indexOf(used.charAt(number)) < 0) &&
                                         (compareRow[8].indexOf(used.charAt(number)) < 0)) {
                                     grid[i][j] = Integer.parseInt("" + used.charAt(number));
-                                    Log.d("3", Solve.testing(grid));
-                                    Log.d("I VALUE", "" + i);
-                                    Log.d("J VALUE", "" + j);
                                     numberOf0--;
                                     break;
                                 }
@@ -436,9 +428,6 @@ public class Soduko {
                                         (compareGrid[7].indexOf(used.charAt(number)) < 0) &&
                                         (compareGrid[8].indexOf(used.charAt(number)) < 0)) {
                                     grid[i][j] = Integer.parseInt("" + used.charAt(number));
-                                    Log.d("4", Solve.testing(grid));
-                                    Log.d("I VALUE", "" + i);
-                                    Log.d("J VALUE", "" + j);
                                     numberOf0--;
                                     break;
                                 }
@@ -497,5 +486,31 @@ public class Soduko {
             }
         }
         return puzzle;
+    }
+
+    public static String printArray(int[][] grid){
+        String answer = "";
+        for (int i = 0; i < grid.length; i++) {
+            answer += "[";
+            for (int j = 0; j < grid[0].length; j++) {
+                answer += "" + grid[i][j] + ",";
+            }
+            answer += "]\n";
+        }
+        return answer;
+    }
+
+    public static boolean solvable(int[][] grid) {
+        int[][] initial = deepCopy(grid);
+        int[][] answer = solveSoduko(initial);
+        for (int i = 0; i < initial.length; i++) {
+            for (int j = 0; j < initial[0].length; j++) {
+                if (answer[i][j] == 0) {
+                    Log.d("bad bro", printArray(answer));
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

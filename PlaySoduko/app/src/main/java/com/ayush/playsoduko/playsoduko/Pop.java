@@ -1,4 +1,4 @@
-package com.example.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.Button;
 
 /**
- * Created by ayushranjan on 08/01/17.
+ * Created by ayushranjan on 01/11/16.
  */
-public class PopOnlinePlay extends Activity{
+public class Pop extends Activity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class PopOnlinePlay extends Activity{
         Button num9 = (Button) findViewById(R.id.nine);
         Button num0 = (Button) findViewById(R.id.zero);
 
-        String buttonDissapear = Soduko.buttonsNotAvailable(PlayOnline.soduko,PlayOnline.i,PlayOnline.j);
+        String buttonDissapear = Soduko.buttonsNotAvailable(Solve.soduko, Solve.i,Solve.j);
 
         for(int i = 0; i < buttonDissapear.length(); i++){
             switch (buttonDissapear.charAt(i)){
@@ -74,8 +75,8 @@ public class PopOnlinePlay extends Activity{
         num1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 1;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 1;
+                Solve.update();
                 finish();
             }
         });
@@ -84,8 +85,8 @@ public class PopOnlinePlay extends Activity{
         num2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 2;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 2;
+                Solve.update();
                 finish();
             }
         });
@@ -93,8 +94,8 @@ public class PopOnlinePlay extends Activity{
         num3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 3;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 3;
+                Solve.update();
                 finish();
             }
         });
@@ -102,8 +103,8 @@ public class PopOnlinePlay extends Activity{
         num4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 4;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 4;
+                Solve.update();
                 finish();
             }
         });
@@ -111,8 +112,8 @@ public class PopOnlinePlay extends Activity{
         num5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 5;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 5;
+                Solve.update();
                 finish();
             }
         });
@@ -121,8 +122,8 @@ public class PopOnlinePlay extends Activity{
         num6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 6;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 6;
+                Solve.update();
                 finish();
             }
         });
@@ -130,8 +131,8 @@ public class PopOnlinePlay extends Activity{
         num7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 7;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 7;
+                Solve.update();
                 finish();
             }
         });
@@ -140,8 +141,8 @@ public class PopOnlinePlay extends Activity{
         num8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 8;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 8;
+                Solve.update();
                 finish();
             }
         });
@@ -149,8 +150,8 @@ public class PopOnlinePlay extends Activity{
         num9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 9;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 9;
+                Solve.update();
                 finish();
             }
         });
@@ -159,8 +160,8 @@ public class PopOnlinePlay extends Activity{
         num0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PlayOnline.CURRENT_NUMBER = 0;
-                PlayOnline.update();
+                Solve.CURRENT_NUMBER = 0;
+                Solve.update();
                 finish();
             }
         });
