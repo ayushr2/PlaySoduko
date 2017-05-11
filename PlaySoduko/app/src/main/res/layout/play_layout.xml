@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Choose Difficulty"
+        android:text="@string/choose_difficulty"
         android:textAlignment="center"
         android:gravity="center"
         android:textSize="40sp"
@@ -23,16 +23,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:id="@+id/seekBarText"
+            android:id="@+id/seek_bar_text_view"
             android:textColor="@color/white"
             android:textSize="30sp"
+            android:text="1/5"
             android:textAlignment="center"
-            android:gravity="center"/>
+            android:gravity="top"/>
         <SeekBar
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/seekBar"
+            android:id="@+id/difficulty_seek_bar"
             android:max="4"/>
     </LinearLayout>
     <Space
@@ -42,25 +43,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:weightSum="2">
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_weight="1">
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/playonline"
             android:background="@color/transparent"
             android:textColor="@color/white"
             android:textSize="35sp"
-            android:text="PLAY ONLINE"/>
+            android:id="@+id/play_locally_button"
+            android:layout_weight="1"
+            android:text="Play Locally"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:background="@color/transparent"
             android:textColor="@color/white"
             android:textSize="35sp"
-            android:id="@+id/playsingle"
-            android:text="PLAY SINGLE"/>
+            android:id="@+id/play_online_button"
+            android:layout_weight="1"
+            android:text="Play online"/>
     </LinearLayout>
 </LinearLayout>

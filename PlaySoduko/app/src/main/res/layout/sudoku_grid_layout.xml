@@ -1,20 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:weightSum="26.1"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    android:weightSum="10">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="3"
+        android:id="@+id/top_bar"
+        android:layout_weight="6.1"
+        android:background="@drawable/space_background_small"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="30 : 00"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:id="@+id/timer"
+            android:gravity="start|center_vertical"
+            android:textSize="25sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="You : 30"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:id="@+id/own_num_left"
+            android:textSize="25sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Other : 30"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:id="@+id/other_num_left"
+            android:gravity="end|center_vertical"
+            android:textSize="25sp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.4"
         android:weightSum="3"
+        android:layout_weight="4.9"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -29,19 +65,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index00"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index01"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index02"/>
             </LinearLayout>
             <LinearLayout
@@ -54,19 +90,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index10"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index11"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index12"/>
             </LinearLayout>
             <LinearLayout
@@ -79,19 +115,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index20"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index21"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index22"/>
             </LinearLayout>
         </LinearLayout>
@@ -99,7 +135,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -114,19 +150,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index03"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index04"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index05"/>
             </LinearLayout>
             <LinearLayout
@@ -139,19 +175,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index13"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index14"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index15"/>
             </LinearLayout>
             <LinearLayout
@@ -164,19 +200,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index23"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index24"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index25"/>
             </LinearLayout>
         </LinearLayout>
@@ -184,7 +220,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -199,19 +235,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index06"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index07"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index08"/>
             </LinearLayout>
             <LinearLayout
@@ -224,19 +260,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index16"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index17"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index18"/>
             </LinearLayout>
             <LinearLayout
@@ -249,19 +285,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index26"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index27"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index28"/>
             </LinearLayout>
         </LinearLayout>
@@ -270,13 +306,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.4"
         android:weightSum="3"
+        android:layout_weight="4.9"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -291,19 +327,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index30"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index31"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index32"/>
             </LinearLayout>
             <LinearLayout
@@ -316,19 +352,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index40"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index41"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index42"/>
             </LinearLayout>
             <LinearLayout
@@ -341,19 +377,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index50"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index51"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index52"/>
             </LinearLayout>
         </LinearLayout>
@@ -361,7 +397,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -376,19 +412,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index33"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index34"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index35"/>
             </LinearLayout>
             <LinearLayout
@@ -401,19 +437,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index43"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index44"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index45"/>
             </LinearLayout>
             <LinearLayout
@@ -426,19 +462,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index53"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index54"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index55"/>
             </LinearLayout>
         </LinearLayout>
@@ -446,7 +482,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -461,19 +497,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index36"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index37"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index38"/>
             </LinearLayout>
             <LinearLayout
@@ -486,19 +522,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index46"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index47"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index48"/>
             </LinearLayout>
             <LinearLayout
@@ -511,19 +547,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index56"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index57"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index58"/>
             </LinearLayout>
         </LinearLayout>
@@ -532,13 +568,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.4"
+        android:layout_weight="4.9"
         android:weightSum="3"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -553,19 +589,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index60"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index61"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index62"/>
             </LinearLayout>
             <LinearLayout
@@ -578,19 +614,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index70"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index71"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index72"/>
             </LinearLayout>
             <LinearLayout
@@ -603,19 +639,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index80"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index81"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index82"/>
             </LinearLayout>
         </LinearLayout>
@@ -623,7 +659,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -638,19 +674,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index63"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index64"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index65"/>
             </LinearLayout>
             <LinearLayout
@@ -663,19 +699,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index73"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index74"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index75"/>
             </LinearLayout>
             <LinearLayout
@@ -688,19 +724,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index83"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index84"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index85"/>
             </LinearLayout>
         </LinearLayout>
@@ -708,7 +744,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/mainback"
+            android:background="@drawable/sub_grid_back"
             android:padding="0.7dp"
             android:orientation="vertical"
             android:layout_weight="1"
@@ -723,19 +759,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index66"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index67"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index68"/>
             </LinearLayout>
             <LinearLayout
@@ -748,19 +784,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index76"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index77"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index78"/>
             </LinearLayout>
             <LinearLayout
@@ -773,19 +809,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index86"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index87"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/back"
+                    android:background="@drawable/unselected_cell"
                     android:id="@+id/index88"/>
             </LinearLayout>
         </LinearLayout>
@@ -794,24 +830,139 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2.8"
-        android:weightSum="5"
-        android:orientation="horizontal">
-        <TextView
+        android:weightSum="2"
+        android:background="@drawable/space_background_medium"
+        android:orientation="vertical"
+        android:layout_weight="5.3">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/timer"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:textAlignment="center"/>
-        <Button
+            android:weightSum="6"
+            android:layout_weight="1">
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="1"
+                android:id="@+id/one"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="2"
+                android:id="@+id/two"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="3"
+                android:id="@+id/three"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="4"
+                android:id="@+id/four"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="5"
+                android:id="@+id/five"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:id="@+id/positive"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:id="@+id/quit"
-            android:background="@color/red"
-            android:textSize="20sp"
-            android:text="quit"/>
+            android:weightSum="6"
+            android:layout_weight="1">
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="6"
+                android:id="@+id/six"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="7"
+                android:id="@+id/seven"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="8"
+                android:id="@+id/eight"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="9"
+                android:id="@+id/nine"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:text="empty"
+                android:id="@+id/zero"
+                android:textColor="@color/white"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="match_parent"
+                android:background="@color/transparent"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:id="@+id/negative"
+                android:textColor="@color/red"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

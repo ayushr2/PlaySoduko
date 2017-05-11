@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">PlaySoduko</string>
+    <string name="app_name">Sudoku</string>
+    <string name="facebook_app_id">205548869936618</string>
+    <string name="keystore">ga0RGNYHvNM5d0SLGQfpQWAPGJ8=</string>
+    <string name="success_log_in">Login Successful!</string>
+    <string name="cancel_log_in">Login Cancelled</string>
+    <string name="error_log_in">Error occurred while logging in</string>
+    <string name="play">play</string>
+    <string name="solve">Solve</string>
+    <string name="log_out">log out</string>
+    <string name="log_out_prompt">Do you want to remove this app from your facebook account?</string>
+    <string name="quit_prompt">Are you sure you want to quit?</string>
+    <string name="welcome_deafult">Welcome!</string>
+    <string name="no_solution">This input does not have a unique solution</string>
+    <string name="clear">clear</string>
+    <string name="go">go</string>
+    <string name="new_game">new game</string>
+    <string name="quit">quit</string>
+    <string name="choose_difficulty">Choose Difficulty</string>
+    <string name="lost_message">Sorry! You lost the game because you ran out of time.</string>
+    <string name="lost_message_online">Sorry! You lost the game because your opponent completed the puzzle before you.</string>
+    <string name="quit_message">Congratulations! You won the game! Your opponent quit.</string>
+    <string name="won_message">Congratulations! You won the game!</string>
 </resources>

@@ -2,37 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ayush.playsoduko.playsoduko">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/best"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.ayush.playsoduko.playsoduko.Home">
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <activity android:name="com.ayush.playsoduko.playsoduko.LogInActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.ayush.playsoduko.playsoduko.Play"></activity>
-        <activity android:name="com.ayush.playsoduko.playsoduko.Solve"
-            android:noHistory="true"></activity>
-        <activity android:name="com.ayush.playsoduko.playsoduko.Pop"
-            android:theme="@style/AppTheme.keyPadCustom">
+        <activity android:name=".HomeActivity"/>
+        <activity android:name=".SolveActivity">
         </activity>
-        <activity android:name="com.ayush.playsoduko.playsoduko.PlaySingle"
-            android:noHistory="true"></activity>
-        <activity android:name="com.ayush.playsoduko.playsoduko.PopSinglePlay"
-            android:theme="@style/AppTheme.keyPadCustom">
-        </activity>
-        <activity android:name="com.ayush.playsoduko.playsoduko.PlayOnline"
-            android:noHistory="true"></activity>
-        <activity android:name="com.ayush.playsoduko.playsoduko.PopOnlinePlay"
-            android:theme="@style/AppTheme.keyPadCustom">
-        </activity>
-        <activity android:name="com.ayush.playsoduko.playsoduko.Win">
-        </activity>
+        <activity android:name=".PlayActivity"/>
+        <activity android:name=".PlayLocalActivity"/>
+        <activity android:name=".PlayOnlineActivity"/>
     </application>
 
 </manifest>
