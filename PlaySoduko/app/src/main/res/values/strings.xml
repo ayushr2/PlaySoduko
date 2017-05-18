@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sudoku</string>
+    <string name="app_name">Play Soduko</string>
     <string name="facebook_app_id">205548869936618</string>
     <string name="keystore">ga0RGNYHvNM5d0SLGQfpQWAPGJ8=</string>
     <string name="success_log_in">Login Successful!</string>
