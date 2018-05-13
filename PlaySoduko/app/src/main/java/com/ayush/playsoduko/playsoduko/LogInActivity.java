@@ -27,10 +27,9 @@ import com.facebook.login.widget.LoginButton;
 public class LogInActivity extends Activity {
 
     public static final String EMAIL = "email";
-    public static final String USER_ID = "Player ID";
-    public static final String AUTH_TOKEN = "Auth Token";
     private CallbackManager callbackManager;
     private LoginButton loginButton;
+    private Intent homeActivityIntent;
 
     /**
      * This populates the screen with the activity xml layout and sets the log in button using
@@ -42,15 +41,14 @@ public class LogInActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in_activity_layout);
+        homeActivityIntent = new Intent(getApplicationContext(), HomeActivity.class);
 
         // check if user is already logged in
         if (isLoggedIn()) {
-            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-            startActivity(intent);
+            startActivity(homeActivityIntent);
         }
 
         initLoginUtils();
-
         animateLogo();
 
         // Callback registration
@@ -59,10 +57,7 @@ public class LogInActivity extends Activity {
             public void onSuccess(LoginResult loginResult) {
                 Toast.makeText(getApplicationContext(), getString(R.string.success_log_in),
                         Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                intent.putExtra(USER_ID, loginResult.getAccessToken().getUserId());
-                intent.putExtra(AUTH_TOKEN, loginResult.getAccessToken().getToken());
-                startActivity(intent);
+                startActivity(homeActivityIntent);
             }
 
             @Override
@@ -108,7 +103,7 @@ public class LogInActivity extends Activity {
      */
     private void initLoginUtils() {
         callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions(EMAIL);
     }
 

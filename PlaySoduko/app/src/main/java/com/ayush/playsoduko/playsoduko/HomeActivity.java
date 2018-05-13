@@ -42,7 +42,6 @@ public class HomeActivity extends Activity {
     private TextView welcomeView;
     private Intent intentPlay;
     private Intent intentSolve;
-    private Intent intentLogIn;
     private ProfilePictureView profilePictureView;
 
     /**
@@ -77,7 +76,7 @@ public class HomeActivity extends Activity {
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showLogOutDialog(intentLogIn);
+                showLogOutDialog();
             }
         });
 
@@ -96,19 +95,17 @@ public class HomeActivity extends Activity {
     /**
      * This helper function displays a Dialog box asking the user if they want to remove the app from
      * their facebook completely or not. Then in both cases it logs the user out anyways.
-     *
-     * @param intentLogIn intent which leads back to the home page
      */
-    private void showLogOutDialog(final Intent intentLogIn) {
+    private void showLogOutDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         builder.setMessage(getString(R.string.log_out_prompt));
 
         builder.setPositiveButton(POSITIVE_TAG, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                logoutComplete();
+                logoutCompletely();
                 LoginManager.getInstance().logOut();
-                startActivity(intentLogIn);
+                finish();
             }
         });
 
@@ -116,8 +113,7 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 LoginManager.getInstance().logOut();
-                startActivity(intentLogIn);
-                dialog.cancel();
+                finish();
             }
         });
 
@@ -136,11 +132,11 @@ public class HomeActivity extends Activity {
      * changed because the Profile is loaded asynchronously so it returns null right after log in.
      */
     private void initComponents() {
-        playButton = (Button) findViewById(R.id.playButton);
-        solveButton = (Button) findViewById(R.id.solveButton);
-        logOutButton = (Button) findViewById(R.id.log_out_button);
-        welcomeView = (TextView) findViewById(R.id.user_name);
-        profilePictureView = (ProfilePictureView) findViewById(R.id.profile_picture);
+        playButton = findViewById(R.id.playButton);
+        solveButton = findViewById(R.id.solveButton);
+        logOutButton = findViewById(R.id.log_out_button);
+        welcomeView = findViewById(R.id.user_name);
+        profilePictureView = findViewById(R.id.profile_picture);
 
         // Checks if the profile is changed and hence current profile is null. If so updates the profile
         if (Profile.getCurrentProfile() != null) {
@@ -161,7 +157,6 @@ public class HomeActivity extends Activity {
 
         intentPlay = new Intent(this, PlayActivity.class);
         intentSolve = new Intent(this, SolveActivity.class);
-        intentLogIn = new Intent(this, LogInActivity.class);
     }
 
     /**
@@ -173,7 +168,7 @@ public class HomeActivity extends Activity {
      * @see <a href="https://stackoverflow.com/questions/29305232/facebook-sdk-4-for-android-how-to-log-out-programmatically">
      * Stack Overflow Complete Log Out</a>
      */
-    public void logoutComplete() {
+    public void logoutCompletely() {
         if (AccessToken.getCurrentAccessToken() == null) {
             return; // already logged out
         }
