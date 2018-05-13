@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayush.playsoduko.playsoduko.R;
+import com.ayush.playsoduko.playsoduko.utilities.CircleTransformation;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.facebook.AccessToken;
@@ -20,7 +22,7 @@ import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
-import com.facebook.login.widget.ProfilePictureView;
+import com.squareup.picasso.Picasso;
 
 // Library Imports
 
@@ -43,7 +45,8 @@ public class HomeActivity extends Activity {
     private TextView welcomeView;
     private Intent intentPlay;
     private Intent intentSolve;
-    private ProfilePictureView profilePictureView;
+    // private ProfilePictureView profilePictureView;
+    private ImageView profilePictureView;
 
     /**
      * This populates the screen with the activity xml layout and sets the button on click listeners.
@@ -141,16 +144,14 @@ public class HomeActivity extends Activity {
 
         // Checks if the profile is changed and hence current profile is null. If so updates the profile
         if (Profile.getCurrentProfile() != null) {
-            welcomeView.setText(WELCOME_TAG + Profile.getCurrentProfile().getName());
-            profilePictureView.setProfileId(Profile.getCurrentProfile().getId());
+            updateUiForCurrentUser(Profile.getCurrentProfile());
         } else {
             ProfileTracker profileTracker = new ProfileTracker() {
                 @Override
                 protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
                     this.stopTracking();
                     Profile.setCurrentProfile(currentProfile);
-                    profilePictureView.setProfileId(currentProfile.getId());
-                    welcomeView.setText(WELCOME_TAG + currentProfile.getName());
+                    updateUiForCurrentUser(currentProfile);
                 }
             };
             profileTracker.startTracking();
@@ -158,6 +159,13 @@ public class HomeActivity extends Activity {
 
         intentPlay = new Intent(this, PlayActivity.class);
         intentSolve = new Intent(this, SolveActivity.class);
+    }
+
+    private void updateUiForCurrentUser(Profile currentProfile) {
+        welcomeView.setText(WELCOME_TAG + currentProfile.getName());
+        Picasso.with(getApplicationContext()).load(currentProfile.getProfilePictureUri(120, 120))
+                .transform(new CircleTransformation())
+                .into(profilePictureView);
     }
 
     /**

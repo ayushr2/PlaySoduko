@@ -21,4 +21,5 @@
     <string name="lost_message_online">Sorry! You lost the game because your opponent completed the puzzle before you.</string>
     <string name="quit_message">Congratulations! You won the game! Your opponent quit.</string>
     <string name="won_message">Congratulations! You won the game!</string>
+    <string name="profile_picture_tag">profile picture</string>
 </resources>
