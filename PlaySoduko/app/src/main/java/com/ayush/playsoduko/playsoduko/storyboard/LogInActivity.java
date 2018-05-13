@@ -1,10 +1,11 @@
-package com.ayush.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko.storyboard;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.ayush.playsoduko.playsoduko.R;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.facebook.AccessToken;

@@ -1,4 +1,4 @@
-package com.ayush.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko.storyboard.play_mode;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -8,6 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
+import com.ayush.playsoduko.playsoduko.firebase_objects.Player;
+import com.ayush.playsoduko.playsoduko.R;
+import com.ayush.playsoduko.playsoduko.firebase_objects.SerializedSudoku;
+import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
+import com.ayush.playsoduko.playsoduko.storyboard.HomeActivity;
+import com.ayush.playsoduko.playsoduko.storyboard.PlayActivity;
 import com.facebook.Profile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

@@ -1,4 +1,4 @@
-package com.ayush.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko.utilities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ayush.playsoduko.playsoduko.R;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 

@@ -1,4 +1,6 @@
-package com.ayush.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko.utilities;
+
+import com.ayush.playsoduko.playsoduko.firebase_objects.SerializedSudoku;
 
 import java.util.ArrayList;
 import java.util.Arrays;

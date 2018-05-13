@@ -1,10 +1,16 @@
-package com.ayush.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko.storyboard.play_mode;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
+import com.ayush.playsoduko.playsoduko.R;
+import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
+import com.ayush.playsoduko.playsoduko.storyboard.HomeActivity;
+import com.ayush.playsoduko.playsoduko.storyboard.PlayActivity;
 
 /**
  * This activity represents the interface where the user can play locally. This activity extends

@@ -1,8 +1,12 @@
-package com.ayush.playsoduko.playsoduko;
+package com.ayush.playsoduko.playsoduko.storyboard;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
+import com.ayush.playsoduko.playsoduko.R;
+import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
 
 /**
  * This activity represents the interface where the user can enter numbers into an empty grid. This
