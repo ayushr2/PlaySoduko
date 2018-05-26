@@ -28,9 +28,6 @@ public class SolveActivity extends GridActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ownNumLeft.setVisibility(View.INVISIBLE);
-        otherNumLeft.setVisibility(View.INVISIBLE);
-        timerTextView.setVisibility(View.INVISIBLE);
         positiveButton.setText(R.string.go);
         negativeButton.setText(R.string.clear);
 
@@ -62,6 +59,11 @@ public class SolveActivity extends GridActivity {
                 fillGrid();
             }
         });
+    }
+
+    @Override
+    protected void onKeyPressed() {
+        // do nothing
     }
 
     @Override

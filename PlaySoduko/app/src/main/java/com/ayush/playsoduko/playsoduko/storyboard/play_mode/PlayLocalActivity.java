@@ -2,15 +2,14 @@ package com.ayush.playsoduko.playsoduko.storyboard.play_mode;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.TextView;
 
-import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
 import com.ayush.playsoduko.playsoduko.R;
+import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
 import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
-import com.ayush.playsoduko.playsoduko.storyboard.HomeActivity;
-import com.ayush.playsoduko.playsoduko.storyboard.PlayActivity;
 
 /**
  * This activity represents the interface where the user can play locally. This activity extends
@@ -22,7 +21,9 @@ import com.ayush.playsoduko.playsoduko.storyboard.PlayActivity;
  * @since 20/04/17.
  */
 public class PlayLocalActivity extends GridActivity {
-
+    // instance variables
+    protected TextView timerTextView;
+    private CountDownTimer countDownTimer;
     protected int difficulty;
     protected int seconds;
     protected int numOfCellDrop;
@@ -36,16 +37,20 @@ public class PlayLocalActivity extends GridActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ownNumLeft.setVisibility(View.INVISIBLE);
-        otherNumLeft.setVisibility(View.INVISIBLE);
         positiveButton.setText(R.string.new_game);
         negativeButton.setText(R.string.quit);
 
+        timerTextView = (TextView) findViewById(R.id.timer);
         difficulty = getIntent().getIntExtra(GridActivity.DIFFICULTY_TAG, 3);
         analyseDifficulty(difficulty);
 
         initSudokuBoard();
         setButtonListeners();
+    }
+
+    @Override
+    protected void onKeyPressed() {
+        // do nothing here
     }
 
     /**
@@ -64,7 +69,7 @@ public class PlayLocalActivity extends GridActivity {
         negativeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), PlayActivity.class));
+                finish();
             }
         });
     }
@@ -90,10 +95,10 @@ public class PlayLocalActivity extends GridActivity {
             });
         }
 
-        builder.setNegativeButton("Home", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finish();
             }
         });
 
@@ -118,10 +123,10 @@ public class PlayLocalActivity extends GridActivity {
             }
         });
 
-        builder.setNegativeButton("Home", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finish();
             }
         });
 
@@ -168,6 +173,35 @@ public class PlayLocalActivity extends GridActivity {
                 }
             }
         }
+    }
+
+    /**
+     * Starts the timer text view with the input seconds.
+     *
+     * @param seconds the number of seconds the timer is supposed to start with
+     */
+    protected void startTimer(long seconds) {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+
+        countDownTimer = new CountDownTimer(seconds * COUNT_DOWN_INTERVAL, COUNT_DOWN_INTERVAL) {
+
+            public void onTick(long millisUntilFinished) {
+                long seconds = (millisUntilFinished / 1000);
+                long minutes = seconds / 60;
+                timerTextView.setText(minutes + " : " + (seconds % 60));
+                if (sudoku.getNumLeft() == 0) {
+                    showWinDialog();
+                    countDownTimer.cancel();
+                }
+            }
+
+            public void onFinish() {
+                timerTextView.setText("Time Up!");
+                showLoseDialog();
+            }
+        }.start();
     }
 
     /**

@@ -15,7 +15,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="30 : 00"
             android:textColor="@color/white"
             android:layout_weight="1"
             android:id="@+id/timer"
@@ -24,7 +23,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="You : 30"
             android:gravity="center"
             android:layout_weight="1"
             android:textColor="@color/white"
@@ -33,7 +31,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Other : 30"
             android:layout_weight="1"
             android:textColor="@color/white"
             android:id="@+id/other_num_left"

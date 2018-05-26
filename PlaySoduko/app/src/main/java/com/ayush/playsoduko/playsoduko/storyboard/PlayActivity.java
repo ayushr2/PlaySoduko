@@ -46,7 +46,7 @@ public class PlayActivity extends Activity {
 
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        difficultyText.setText((progress + 1) + "/" + MAX_DIFFICULTY);
+                        difficultyText.setText(String.format("%d/%d", (progress + 1), MAX_DIFFICULTY));
                     }
                 }
         );
@@ -72,14 +72,14 @@ public class PlayActivity extends Activity {
     }
 
     private void initElements() {
-        difficultySeek = (SeekBar) findViewById(R.id.difficulty_seek_bar);
-        difficultyText = (TextView) findViewById(R.id.seek_bar_text_view);
-        localPlayButton = (Button) findViewById(R.id.play_locally_button);
-        onlinePLayButton = (Button) findViewById(R.id.play_online_button);
+        difficultySeek = findViewById(R.id.difficulty_seek_bar);
+        difficultyText = findViewById(R.id.seek_bar_text_view);
+        localPlayButton = findViewById(R.id.play_locally_button);
+        onlinePLayButton = findViewById(R.id.play_online_button);
     }
 
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        finish();
     }
 
 }

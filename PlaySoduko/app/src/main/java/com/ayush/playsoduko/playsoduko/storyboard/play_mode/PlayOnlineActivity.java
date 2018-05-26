@@ -6,15 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 
-import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
-import com.ayush.playsoduko.playsoduko.firebase_objects.Player;
 import com.ayush.playsoduko.playsoduko.R;
+import com.ayush.playsoduko.playsoduko.firebase_objects.Player;
 import com.ayush.playsoduko.playsoduko.firebase_objects.SerializedSudoku;
-import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
 import com.ayush.playsoduko.playsoduko.storyboard.HomeActivity;
 import com.ayush.playsoduko.playsoduko.storyboard.PlayActivity;
+import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
+import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
 import com.facebook.Profile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +37,9 @@ public class PlayOnlineActivity extends PlayLocalActivity {
 
     public static final String PROGRESS_DIALOG_TITLE = "Finding Opponent";
     public static final String PROGRESS_DIALOG_MESSAGE = "Please wait...";
+
+    private TextView ownNumLeft;
+    private TextView otherNumLeft;
     private Player myself;
     private Player opponent;
     private String opponentId;
@@ -59,6 +62,8 @@ public class PlayOnlineActivity extends PlayLocalActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ownNumLeft = findViewById(R.id.own_num_left);
+        otherNumLeft = findViewById(R.id.other_num_left);
         waitingForOpponentDialog = new ProgressDialog(this);
         waitingForOpponentDialog.setTitle(PROGRESS_DIALOG_TITLE);
         waitingForOpponentDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
@@ -161,109 +166,11 @@ public class PlayOnlineActivity extends PlayLocalActivity {
         });
     }
 
+
     @Override
-    protected void initialiseKeyboard() {
-        keyboard = new Button[KEYBOARD_SIZE];
-        keyboard[0] = (Button) findViewById(R.id.zero);
-        keyboard[1] = (Button) findViewById(R.id.one);
-        keyboard[2] = (Button) findViewById(R.id.two);
-        keyboard[3] = (Button) findViewById(R.id.three);
-        keyboard[4] = (Button) findViewById(R.id.four);
-        keyboard[5] = (Button) findViewById(R.id.five);
-        keyboard[6] = (Button) findViewById(R.id.six);
-        keyboard[7] = (Button) findViewById(R.id.seven);
-        keyboard[8] = (Button) findViewById(R.id.eight);
-        keyboard[9] = (Button) findViewById(R.id.nine);
-
-        keyboard[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 0);
-                cells[currentX][currentY].setText("");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 1);
-                cells[currentX][currentY].setText("1");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 2);
-                cells[currentX][currentY].setText("2");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 3);
-                cells[currentX][currentY].setText("3");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 4);
-                cells[currentX][currentY].setText("4");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 5);
-                cells[currentX][currentY].setText("5");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 6);
-                cells[currentX][currentY].setText("6");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[7].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 7);
-                cells[currentX][currentY].setText("7");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[8].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 8);
-                cells[currentX][currentY].setText("8");
-                updateMyNumLeft();
-            }
-        });
-
-        keyboard[9].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 9);
-                cells[currentX][currentY].setText("9");
-                updateMyNumLeft();
-            }
-        });
+    protected void onKeyPressed() {
+        super.onKeyPressed();
+        updateMyNumLeft();
     }
 
     private void updateMyNumLeft() {

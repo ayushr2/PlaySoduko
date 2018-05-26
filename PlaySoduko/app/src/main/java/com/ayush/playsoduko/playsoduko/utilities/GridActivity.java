@@ -2,14 +2,15 @@ package com.ayush.playsoduko.playsoduko.utilities;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.ayush.playsoduko.playsoduko.R;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * This class represents the GridActivity which describes a "Generic" Sudoku interface used in this
@@ -30,12 +31,9 @@ public abstract class GridActivity extends Activity {
     protected Button[][] cells;
     protected int[][] buttonId;
     protected Button[] keyboard;
-    protected TextView timerTextView;
-    protected CountDownTimer countDownTimer;
+    private boolean[] keyboardVisible;
     protected Button positiveButton;
     protected Button negativeButton;
-    protected TextView ownNumLeft;
-    protected TextView otherNumLeft;
     protected int currentX;
     protected int currentY;
 
@@ -49,39 +47,14 @@ public abstract class GridActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sudoku_grid_layout);
 
+        initialiseComponents();
+    }
+
+    protected void initialiseComponents() {
         initialiseIds();
         initialiseCells();
         initialiseKeyboard();
         initialiseElements();
-    }
-
-    /**
-     * Starts the timer text view with the input seconds.
-     *
-     * @param seconds the number of seconds the timer is supposed to start with
-     */
-    protected void startTimer(long seconds) {
-        if (countDownTimer != null) {
-            countDownTimer.cancel();
-        }
-
-        countDownTimer = new CountDownTimer(seconds * COUNT_DOWN_INTERVAL, COUNT_DOWN_INTERVAL) {
-
-            public void onTick(long millisUntilFinished) {
-                long seconds = (millisUntilFinished / 1000);
-                long minutes = seconds / 60;
-                timerTextView.setText(minutes + " : " + (seconds % 60));
-                if (sudoku.getNumLeft() == 0) {
-                    showWinDialog();
-                    countDownTimer.cancel();
-                }
-            }
-
-            public void onFinish() {
-                timerTextView.setText("Time Up!");
-                showLoseDialog();
-            }
-        }.start();
     }
 
     /**
@@ -105,6 +78,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 0);
                 cells[currentX][currentY].setText("");
+                onKeyPressed();
             }
         });
 
@@ -113,6 +87,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 1);
                 cells[currentX][currentY].setText("1");
+                onKeyPressed();
             }
         });
 
@@ -121,6 +96,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 2);
                 cells[currentX][currentY].setText("2");
+                onKeyPressed();
             }
         });
 
@@ -129,6 +105,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 3);
                 cells[currentX][currentY].setText("3");
+                onKeyPressed();
             }
         });
 
@@ -137,6 +114,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 4);
                 cells[currentX][currentY].setText("4");
+                onKeyPressed();
             }
         });
 
@@ -145,6 +123,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 5);
                 cells[currentX][currentY].setText("5");
+                onKeyPressed();
             }
         });
 
@@ -153,6 +132,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 6);
                 cells[currentX][currentY].setText("6");
+                onKeyPressed();
             }
         });
 
@@ -161,6 +141,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 7);
                 cells[currentX][currentY].setText("7");
+                onKeyPressed();
             }
         });
 
@@ -169,6 +150,7 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 8);
                 cells[currentX][currentY].setText("8");
+                onKeyPressed();
             }
         });
 
@@ -177,9 +159,12 @@ public abstract class GridActivity extends Activity {
             public void onClick(View v) {
                 sudoku.setSudoku(currentX, currentY, 9);
                 cells[currentX][currentY].setText("9");
+                onKeyPressed();
             }
         });
     }
+
+    protected abstract void onKeyPressed();
 
     /**
      * Initialises an array of Ids which refer to the 2D grid of buttons
@@ -287,7 +272,7 @@ public abstract class GridActivity extends Activity {
 
         for (int i = 0; i < Sudoku.DIMENSION; i++) {
             for (int j = 0; j < Sudoku.DIMENSION; j++) {
-                cells[i][j] = (Button) findViewById(buttonId[i][j]);
+                cells[i][j] = findViewById(buttonId[i][j]);
 
                 final int i_x = i;
                 final int j_y = j;
@@ -310,40 +295,24 @@ public abstract class GridActivity extends Activity {
      * updates the keyboard each time a cell is changed. Does animation to drop invalid keys.
      */
     protected void updateKeyBoard() {
-        reappearButtons();
-        dissapearButtons();
-    }
-
-    /**
-     * makes the invalid buttons for teh current cell drop by animation
-     */
-    protected void dissapearButtons() {
-        Integer[] invalidDigits = sudoku.buttonsNotAvailable(currentX, currentY);
-        for (Integer invalidDigit : invalidDigits) {
-            YoYo.with(Techniques.Hinge)
-                    .duration(1000)
-                    .repeat(1)
-                    .playOn(keyboard[invalidDigit]);
-        }
-    }
-
-    /**
-     * makes the valid keys appear
-     */
-    protected void reappearButtons() {
-        Integer[] validDigits = sudoku.buttonsAvailable(currentX, currentY);
-        for (Integer validDigit : validDigits) {
-            int indexOutOfFive = validDigit % 5;
-            if (indexOutOfFive == 4 || indexOutOfFive == 0) {
-                YoYo.with(Techniques.BounceInRight)
-                        .duration(1000)
+        HashSet<Integer> toRemove = new HashSet<>(Arrays.asList(sudoku.buttonsNotAvailable(currentX, currentY)));
+        for (int i = 0; i < KEYBOARD_SIZE; i++) {
+            if (keyboardVisible[i] && toRemove.contains(i)) {
+                YoYo.with(Techniques.FadeOut)
+                        .duration(500)
                         .repeat(1)
-                        .playOn(keyboard[validDigit]);
-            } else {
-                YoYo.with(Techniques.BounceInLeft)
-                        .duration(1000)
+                        .playOn(keyboard[i]);
+                keyboardVisible[i] = false;
+                keyboard[i].setClickable(false);
+            }
+
+            if (!keyboardVisible[i] && !toRemove.contains(i)) {
+                YoYo.with(Techniques.FadeIn)
+                        .duration(500)
                         .repeat(1)
-                        .playOn(keyboard[validDigit]);
+                        .playOn(keyboard[i]);
+                keyboardVisible[i] = true;
+                keyboard[i].setClickable(true);
             }
         }
     }
@@ -366,11 +335,10 @@ public abstract class GridActivity extends Activity {
      * Initialises other UI elements.
      */
     private void initialiseElements() {
-        ownNumLeft = (TextView) findViewById(R.id.own_num_left);
-        otherNumLeft = (TextView) findViewById(R.id.other_num_left);
-        timerTextView = (TextView) findViewById(R.id.timer);
-        positiveButton = (Button) findViewById(R.id.positive);
-        negativeButton = (Button) findViewById(R.id.negative);
+        keyboardVisible = new boolean[KEYBOARD_SIZE];
+        Arrays.fill(keyboardVisible, true);
+        positiveButton = findViewById(R.id.positive);
+        negativeButton = findViewById(R.id.negative);
         currentX = 0;
         currentY = 0;
     }
