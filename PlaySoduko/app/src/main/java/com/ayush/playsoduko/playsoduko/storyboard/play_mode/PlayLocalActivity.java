@@ -37,10 +37,15 @@ public class PlayLocalActivity extends GridActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initialiseComponents() {
+        super.initialiseComponents();
         positiveButton.setText(R.string.new_game);
         negativeButton.setText(R.string.quit);
 
-        timerTextView = (TextView) findViewById(R.id.timer);
+        timerTextView = findViewById(R.id.timer);
         difficulty = getIntent().getIntExtra(GridActivity.DIFFICULTY_TAG, 3);
         analyseDifficulty(difficulty);
 
@@ -153,6 +158,10 @@ public class PlayLocalActivity extends GridActivity {
     protected void initSudokuBoard() {
         sudoku = new Sudoku(numOfCellDrop);
         startTimer(seconds);
+        startGame();
+    }
+
+    protected void startGame() {
         fillGrid();
         immutateFeed();
         setCurrentXY();

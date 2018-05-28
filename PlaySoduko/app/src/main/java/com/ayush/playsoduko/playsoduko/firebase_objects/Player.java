@@ -1,7 +1,5 @@
 package com.ayush.playsoduko.playsoduko.firebase_objects;
 
-import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
-
 /**
  * This class represents a Player object which holds information about the Player. Holds the name,
  * the facebook ID and the current number of cells left to complete the sudoku. We use the Facebook
@@ -19,10 +17,9 @@ public class Player {
     private String name;
     private int cellsLeft = 81;
     private String id;
-    private SerializedSudoku grid;
 
     /**
-     * Default Constructor. Doesn't do anything.
+     * Default Constructor. Doesn't do anything. Needed for firebase.
      */
     public Player() {
         // Do nothing
@@ -33,13 +30,13 @@ public class Player {
      *
      * @param userId       facebook unique ID
      * @param facebookName facebook name
-     * @param game         the initial Sudoku game the Player object is initiated with
+     * @param numLeft      number of cells left to finish this game
      */
-    public Player(String userId, String facebookName, Sudoku game) {
+    public Player(String userId, String facebookName, int numLeft) {
         id = userId;
         name = facebookName;
-        grid = new SerializedSudoku(game);
-        cellsLeft = game.getNumLeft();
+        cellsLeft = numLeft;
+        opponentId = null;
     }
 
     // setter
@@ -64,13 +61,6 @@ public class Player {
         return id;
     }
 
-    public SerializedSudoku getGrid() {
-        return grid;
-    }
-
-    public void setGrid(SerializedSudoku grid) {
-        this.grid = grid;
-    }
     public String getOpponentId() {
         return opponentId;
     }

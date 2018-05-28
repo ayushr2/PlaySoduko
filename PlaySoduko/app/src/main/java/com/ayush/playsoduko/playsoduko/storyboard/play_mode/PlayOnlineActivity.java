@@ -3,7 +3,6 @@ package com.ayush.playsoduko.playsoduko.storyboard.play_mode;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import com.ayush.playsoduko.playsoduko.R;
 import com.ayush.playsoduko.playsoduko.firebase_objects.Player;
 import com.ayush.playsoduko.playsoduko.firebase_objects.SerializedSudoku;
 import com.ayush.playsoduko.playsoduko.storyboard.HomeActivity;
-import com.ayush.playsoduko.playsoduko.storyboard.PlayActivity;
 import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
 import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
 import com.facebook.Profile;
@@ -37,18 +35,26 @@ public class PlayOnlineActivity extends PlayLocalActivity {
 
     public static final String PROGRESS_DIALOG_TITLE = "Finding Opponent";
     public static final String PROGRESS_DIALOG_MESSAGE = "Please wait...";
+    public static final String OPPONENT_ID = "opponentId";
+    public static final String SUDOKU_GRID = "grid";
+    public static final String CELLS_LEFT = "cellsLeft";
 
     private TextView ownNumLeft;
     private TextView otherNumLeft;
-    private Player myself;
-    private Player opponent;
-    private String opponentId;
     private DatabaseReference availableUsersReference;
+    private DatabaseReference myReference;
+    private DatabaseReference rootReference;
+    private ProgressDialog waitingForOpponentDialog;
+    private AlertDialog.Builder quitDialog;
+    private AlertDialog.Builder opponentQuitDialog;
     private DatabaseReference playersReference;
-    ValueEventListener waitingForOpponentListener;
-    ValueEventListener updateOpponentListener;
-    ValueEventListener opponentChangeListener;
-    ProgressDialog waitingForOpponentDialog;
+    private String opponentName;
+    private Profile myProfile;
+    private Player myself;
+    private ValueEventListener waitingForOpponentListener;
+    private ValueEventListener readSudokuGridListener;
+    private ValueEventListener opponentNumCellsLeftChangeListener;
+    private ValueEventListener opponentQuitListener;
 
     /**
      * Makes the appropriate text views appear and uses the firebase database to hook the player with
@@ -61,166 +67,22 @@ public class PlayOnlineActivity extends PlayLocalActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ownNumLeft = findViewById(R.id.own_num_left);
-        otherNumLeft = findViewById(R.id.other_num_left);
-        waitingForOpponentDialog = new ProgressDialog(this);
-        waitingForOpponentDialog.setTitle(PROGRESS_DIALOG_TITLE);
-        waitingForOpponentDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
-        waitingForOpponentDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        availableUsersReference.child(myself.getId()).setValue(null);
-                        dialog.cancel();
-                        playersReference.child(myself.getId()).removeEventListener(waitingForOpponentListener);
-                        startActivity(new Intent(getApplication(), PlayActivity.class));
-                    }
-                });
-
-        otherNumLeft.setVisibility(View.VISIBLE);
-        ownNumLeft.setVisibility(View.VISIBLE);
-        timerTextView.setVisibility(View.INVISIBLE);
-        positiveButton.setText("Home");
+        checkForAvailablePlayers();
     }
 
-    /**
-     * Displays a Dialog which declares the user as the loser.
-     */
-    @Override
-    protected void showLoseDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(getString(R.string.lost_message_online));
-
-        builder.setPositiveButton("New Game", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                resetBackground();
-                initSudokuBoard();
-                dialog.cancel();
-            }
-        });
-
-        builder.setNegativeButton("Home", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-            }
-        });
-
-        builder.setCancelable(false);
-        builder.show();
-    }
-
-    @Override
-    protected void setButtonListeners() {
-        positiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(PlayOnlineActivity.this);
-                builder.setMessage(getString(R.string.quit_prompt));
-
-                builder.setPositiveButton(HomeActivity.POSITIVE_TAG, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        playersReference.child(myself.getId()).child("grid").setValue(null);
-                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                    }
-                });
-
-                builder.setNegativeButton(HomeActivity.NEGATIVE_TAG, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
-
-            }
-        });
-
-        negativeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(PlayOnlineActivity.this);
-                builder.setMessage(getString(R.string.quit_prompt));
-
-                builder.setPositiveButton(HomeActivity.POSITIVE_TAG, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        playersReference.child(myself.getId()).child("grid").setValue(null);
-                        startActivity(new Intent(getApplicationContext(), PlayActivity.class));
-                    }
-                });
-
-                builder.setNegativeButton(HomeActivity.NEGATIVE_TAG, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
-            }
-        });
-    }
-
-
-    @Override
-    protected void onKeyPressed() {
-        super.onKeyPressed();
-        updateMyNumLeft();
-    }
-
-    private void updateMyNumLeft() {
-        playersReference.child(myself.getId()).child("cellsLeft").setValue(sudoku.getNumLeft());
-        ownNumLeft.setText("You : " + sudoku.getNumLeft());
-        if (sudoku.getNumLeft() == 0) {
-            showWinDialog();
-            ownNumLeft.setText("You : " + sudoku.getNumLeft());
-        }
-    }
-
-    /**
-     * Initialises sudoku board and finds an opponent who is online.
-     */
-    @Override
-    protected void initSudokuBoard() {
-        sudoku = new Sudoku(numOfCellDrop);
-        findOpponent();
-    }
-
-    /**
-     * This method holds other methods which are called after an opponent is found.
-     */
-    private void postFoundOpponent() {
-        setGameListeners();
-        fillGrid();
-        immutateFeed();
-        setCurrentXY();
-        updateKeyBoard();
-        ownNumLeft.setText("You : " + sudoku.getNumLeft());
-    }
-
-    /**
-     * Finds an opponent for the user using Firebase DB.
-     */
-    private void findOpponent() {
-        initDBComponents();
-        playersReference.child(myself.getId()).setValue(myself);
-
+    private void checkForAvailablePlayers() {
         availableUsersReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    if (dsp.getValue(Boolean.class) && !dsp.getKey().equals(myself.getId())) {
-                        opponentId = dsp.getKey();
+                    if (dsp.getValue(Boolean.class) != null) {
+                        myself.setOpponentId(dsp.getKey());
+                        myReference.child(OPPONENT_ID).setValue(myself.getOpponentId());
                         break;
                     }
                 }
-                makeMatch(opponentId);
-                availableUsersReference.removeEventListener(this);
+
+                makeMatch();
             }
 
             @Override
@@ -230,88 +92,128 @@ public class PlayOnlineActivity extends PlayLocalActivity {
         });
     }
 
-    /**
-     * Makes a match based on the Facebook ID of the opponent. The opponent ID may be null of a vaild
-     * ID. If the other is valid, then it pull the opponent object, puts this players sudoku into that
-     * opponent, puts its own id as the opponent's opponentId and push it back to the database.
-     * If the opponent ID is null, it means that there are no other opponents available at the moment.
-     * Then it puts the user on hold. if another user comes oniine, that user would detect this one
-     * and change its sudoku. Then we will detect it and move on to the game.
-     *
-     * @param opponentId String value of the opponent's ID.
-     */
-    private void makeMatch(final String opponentId) {
-        if (opponentId == null) {
+    private void makeMatch() {
+        if (myself.getOpponentId() == null) {
             availableUsersReference.child(myself.getId()).setValue(true);
-
             waitingForOpponentDialog.show();
-            waitingForOpponentListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    SerializedSudoku change = dataSnapshot.child("grid")
-                            .getValue(SerializedSudoku.class);
-
-                    if (!change.equals(myself.getGrid())) {
-                        myself = dataSnapshot.getValue(Player.class);
-                        sudoku = new Sudoku(myself.getGrid());
-                        availableUsersReference.child(myself.getId()).setValue(null);
-                        waitingForOpponentDialog.cancel();
-                        playersReference.child(myself.getId()).setValue(myself);
-                        playersReference.child(myself.getId()).removeEventListener(waitingForOpponentListener);
-                        postFoundOpponent();
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-            playersReference.child(myself.getId()).addValueEventListener(waitingForOpponentListener);
-
+            myReference.child(OPPONENT_ID).addValueEventListener(waitingForOpponentListener);
         } else {
-            availableUsersReference.child(opponentId).setValue(null);
-            availableUsersReference.child(myself.getId()).setValue(null);
-            myself.setOpponentId(opponentId);
-            playersReference.child(myself.getId()).setValue(myself);
-
-            updateOpponentListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    opponent = dataSnapshot.getValue(Player.class);
-                    opponent.setGrid(myself.getGrid());
-                    opponent.setCellsLeft(myself.getCellsLeft());
-                    opponent.setOpponentId(myself.getId());
-                    playersReference.child(opponentId).setValue(opponent);
-                    playersReference.child(opponentId).removeEventListener(updateOpponentListener);
-                    postFoundOpponent();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-
-            playersReference.child(opponentId).addListenerForSingleValueEvent(updateOpponentListener);
+            sudoku = new Sudoku(numOfCellDrop);
+            playersReference.child(myself.getOpponentId()).child(OPPONENT_ID).setValue(myself.getId());
+            myReference.child(SUDOKU_GRID).setValue(new SerializedSudoku(sudoku));
+            startGame();
         }
     }
 
-    /**
-     * Sets a listener to the opponent's node on the DB. When it updates its cellsLeft, the listener
-     * is triggered and hence this player updates its opponent's cells left text view.
-     */
-    private void setGameListeners() {
-        opponentChangeListener = new ValueEventListener() {
+    @Override
+    protected void onKeyPressed() {
+        updateMyNumLeft();
+    }
+
+    @Override
+    protected void initSudokuBoard() {
+        // do nothing here
+    }
+
+    @Override
+    protected void startGame() {
+        super.startGame();
+        playersReference.child(myself.getOpponentId()).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Player opp = dataSnapshot.getValue(Player.class);
-                if (opp.getGrid() == null) {
-                    showQuitDialog();
-                }
-                otherNumLeft.setText(opp.getName() + " : " + opp.getCellsLeft());
-                if (opp.getCellsLeft() == 0) {
-                    showLoseDialog();
+                opponentName = dataSnapshot.getValue(String.class);
+                updateMyNumLeft();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        myself.setCellsLeft(sudoku.getNumLeft());
+        playersReference.child(myself.getOpponentId()).child(CELLS_LEFT).addValueEventListener(opponentNumCellsLeftChangeListener);
+        myReference.child(OPPONENT_ID).addValueEventListener(opponentQuitListener);
+    }
+
+    private void updateMyNumLeft() {
+        myReference.child(CELLS_LEFT).setValue(sudoku.getNumLeft());
+        ownNumLeft.setText("You : " + sudoku.getNumLeft());
+
+        if (sudoku.getNumLeft() == 0)
+            showWinDialog();
+    }
+
+    /**
+     * Calls the hierarchy of initialise methods and sets ups all fields correctly
+     */
+    @Override
+    protected void initialiseComponents() {
+        super.initialiseComponents();
+        ownNumLeft = findViewById(R.id.own_num_left);
+        otherNumLeft = findViewById(R.id.other_num_left);
+        myProfile = Profile.getCurrentProfile();
+        myself = new Player(myProfile.getId(), myProfile.getName(), 81);
+
+        initialiseDialogs();
+        initialiseDBComponents();
+        initialiseListeners();
+    }
+
+    private void initialiseDialogs() {
+        waitingForOpponentDialog = new ProgressDialog(this);
+        waitingForOpponentDialog.setTitle(PROGRESS_DIALOG_TITLE);
+        waitingForOpponentDialog.setMessage(PROGRESS_DIALOG_MESSAGE);
+        waitingForOpponentDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        availableUsersReference.child(myself.getId()).setValue(null);
+                        myReference.child(OPPONENT_ID).removeEventListener(waitingForOpponentListener);
+                        dialog.cancel();
+                        finish();
+                    }
+                });
+
+        quitDialog = new AlertDialog.Builder(PlayOnlineActivity.this);
+        quitDialog.setMessage(getString(R.string.quit_prompt));
+
+        quitDialog.setPositiveButton(HomeActivity.POSITIVE_TAG, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                playersReference.child(myself.getOpponentId()).child(OPPONENT_ID).setValue(null);
+                finish();
+            }
+        });
+
+        quitDialog.setNegativeButton(HomeActivity.NEGATIVE_TAG, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        opponentQuitDialog = new AlertDialog.Builder(this);
+        opponentQuitDialog.setMessage(getString(R.string.opponent_quit_message));
+
+        opponentQuitDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        opponentQuitDialog.setCancelable(false);
+    }
+
+    private void initialiseListeners() {
+        waitingForOpponentListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String opponentId = dataSnapshot.getValue(String.class);
+                if (opponentId != null) {
+                    myself.setOpponentId(opponentId);
+                    myReference.child(OPPONENT_ID).removeEventListener(waitingForOpponentListener);
+                    playersReference.child(myself.getOpponentId()).child(SUDOKU_GRID).addValueEventListener(readSudokuGridListener);
                 }
             }
 
@@ -321,47 +223,73 @@ public class PlayOnlineActivity extends PlayLocalActivity {
             }
         };
 
-        playersReference.child(myself.getOpponentId()).addValueEventListener(opponentChangeListener);
+        readSudokuGridListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                SerializedSudoku serializedSudoku = dataSnapshot.getValue(SerializedSudoku.class);
+                if (serializedSudoku != null) {
+                    playersReference.child(myself.getOpponentId()).child(SUDOKU_GRID).removeEventListener(readSudokuGridListener);
+                    sudoku = new Sudoku(serializedSudoku);
+                    waitingForOpponentDialog.cancel();
+                    availableUsersReference.child(myself.getId()).setValue(null);
+                    startGame();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        opponentNumCellsLeftChangeListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue(Integer.class) != null) {
+                    otherNumLeft.setText(opponentName + " : " + dataSnapshot.getValue(Integer.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        opponentQuitListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue(String.class) == null) {
+                    opponentQuitDialog.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
     }
 
-    /**
-     * Displays that the player won because the other player quit or started a new game. This is triggered
-     * when the other player leaves the game.
-     */
-    private void showQuitDialog() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(getString(R.string.quit_message));
-
-        builder.setPositiveButton("New Game", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                resetBackground();
-                initSudokuBoard();
-                dialog.cancel();
-            }
-        });
-
-        builder.setNegativeButton("Home", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-            }
-        });
-
-        builder.setCancelable(false);
-        builder.show();
+    private void initialiseDBComponents() {
+        rootReference = FirebaseDatabase.getInstance().getReference();
+        availableUsersReference = rootReference.child("available");
+        playersReference = rootReference.child("players");
+        myReference = playersReference.child(Profile.getCurrentProfile().getId());
+        myReference.setValue(myself);
     }
 
-    /**
-     * Initialises both player objects and sets the reference objects.
-     */
-    private void initDBComponents() {
-        opponent = null;
-        opponentId = null;
-        myself = new Player(Profile.getCurrentProfile().getId(),
-                Profile.getCurrentProfile().getFirstName(), sudoku);
-        availableUsersReference = FirebaseDatabase.getInstance().getReference().child("available");
-        playersReference = FirebaseDatabase.getInstance().getReference().child("players");
+    @Override
+    protected void setButtonListeners() {
+        negativeButton.setVisibility(View.INVISIBLE);
+
+        positiveButton.setText("Quit");
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showQuitAlert();
+            }
+        });
     }
 
     /**
@@ -369,24 +297,16 @@ public class PlayOnlineActivity extends PlayLocalActivity {
      */
     @Override
     public void onBackPressed() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(PlayOnlineActivity.this);
-        builder.setMessage(getString(R.string.quit_prompt));
+        showQuitAlert();
+    }
 
-        builder.setPositiveButton(HomeActivity.POSITIVE_TAG, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                playersReference.child(myself.getId()).child("grid").setValue(null);
-                startActivity(new Intent(getApplicationContext(), PlayActivity.class));
-            }
-        });
+    private void showQuitAlert() {
+        quitDialog.show();
+    }
 
-        builder.setNegativeButton(HomeActivity.NEGATIVE_TAG, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-        builder.show();
     }
 }
