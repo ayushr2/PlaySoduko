@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "880074302534",
+    "firebase_url": "https://playsoduko.firebaseio.com",
+    "project_id": "playsoduko",
+    "storage_bucket": "playsoduko.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880074302534:android:9d04534487331092",
+        "android_client_info": {
+          "package_name": "com.ayush.playsoduko.playsoduko"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880074302534-g98ile6vc8d2ccob96q0o22he8mfp3lf.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "880074302534-g98ile6vc8d2ccob96q0o22he8mfp3lf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtbu1_4Qe6sw0uwIjp9fOixMQexJQVRX8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
