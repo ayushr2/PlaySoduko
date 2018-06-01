@@ -13,29 +13,31 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 /**
- * This class represents the GridActivity which describes a "Generic" Sudoku interface used in this
+ * This class represents the SudokuBoard which describes a "Generic" Sudoku interface used in this
  * app. Elements can be removed and modified to suit the purpose. This class is abstract because we
  * are never making GridActivities. The purpose of this activity is to avoid code duplication.
  *
  * @author ayushranjan
  * @since 11/04/17.
  */
-public abstract class GridActivity extends Activity {
+public abstract class SudokuBoard extends Activity {
     // constants
     public static final int KEYBOARD_SIZE = 10;
     public static final int COUNT_DOWN_INTERVAL = 1000;
     public static final String DIFFICULTY_TAG = "difficulty";
+    private static final String[] KEYBOARD_STRINGS = {"", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
     // instance variables
     protected Sudoku sudoku;
     protected Button[][] cells;
     protected int[][] buttonId;
     protected Button[] keyboard;
+    protected int[] keyboardId;
     private boolean[] keyboardVisible;
     protected Button positiveButton;
     protected Button negativeButton;
-    protected int currentX;
-    protected int currentY;
+    private int currentRow = 0;
+    private int currentColumn = 0;
 
     /**
      * Sets the activity with teh generic elements of a Sudoku grid.
@@ -46,130 +48,26 @@ public abstract class GridActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sudoku_grid_layout);
-
         initialiseComponents();
     }
 
-    protected void initialiseComponents() {
+    /**
+     * Initialises UI components and sets up on click listeners
+     */
+    private void initialiseComponents() {
         initialiseIds();
         initialiseCells();
         initialiseKeyboard();
-        initialiseElements();
+
+        positiveButton = findViewById(R.id.positive);
+        negativeButton = findViewById(R.id.negative);
     }
-
-    /**
-     * Initialises the elements in the keyboard and sets the correct listeners
-     */
-    protected void initialiseKeyboard() {
-        keyboard = new Button[KEYBOARD_SIZE];
-        keyboard[0] = (Button) findViewById(R.id.zero);
-        keyboard[1] = (Button) findViewById(R.id.one);
-        keyboard[2] = (Button) findViewById(R.id.two);
-        keyboard[3] = (Button) findViewById(R.id.three);
-        keyboard[4] = (Button) findViewById(R.id.four);
-        keyboard[5] = (Button) findViewById(R.id.five);
-        keyboard[6] = (Button) findViewById(R.id.six);
-        keyboard[7] = (Button) findViewById(R.id.seven);
-        keyboard[8] = (Button) findViewById(R.id.eight);
-        keyboard[9] = (Button) findViewById(R.id.nine);
-
-        keyboard[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 0);
-                cells[currentX][currentY].setText("");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 1);
-                cells[currentX][currentY].setText("1");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 2);
-                cells[currentX][currentY].setText("2");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 3);
-                cells[currentX][currentY].setText("3");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 4);
-                cells[currentX][currentY].setText("4");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 5);
-                cells[currentX][currentY].setText("5");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 6);
-                cells[currentX][currentY].setText("6");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[7].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 7);
-                cells[currentX][currentY].setText("7");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[8].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 8);
-                cells[currentX][currentY].setText("8");
-                onKeyPressed();
-            }
-        });
-
-        keyboard[9].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sudoku.setSudoku(currentX, currentY, 9);
-                cells[currentX][currentY].setText("9");
-                onKeyPressed();
-            }
-        });
-    }
-
-    protected abstract void onKeyPressed();
 
     /**
      * Initialises an array of Ids which refer to the 2D grid of buttons
      */
     private void initialiseIds() {
+        // SUDOKU GRID IDs
         buttonId = new int[Sudoku.DIMENSION][Sudoku.DIMENSION];
 
         buttonId[0][0] = R.id.index00;
@@ -262,6 +160,44 @@ public abstract class GridActivity extends Activity {
         buttonId[8][7] = R.id.index87;
         buttonId[8][8] = R.id.index88;
 
+
+        // KEYBOARD IDs
+        keyboardId = new int[KEYBOARD_SIZE];
+
+        keyboardId[0] = R.id.zero;
+        keyboardId[1] = R.id.one;
+        keyboardId[2] = R.id.two;
+        keyboardId[3] = R.id.three;
+        keyboardId[4] = R.id.four;
+        keyboardId[5] = R.id.five;
+        keyboardId[6] = R.id.six;
+        keyboardId[7] = R.id.seven;
+        keyboardId[8] = R.id.eight;
+        keyboardId[9] = R.id.nine;
+    }
+
+    /**
+     * Initialises the elements in the keyboard and sets the correct listeners
+     */
+    private void initialiseKeyboard() {
+        keyboardVisible = new boolean[KEYBOARD_SIZE];
+        Arrays.fill(keyboardVisible, true);
+
+        keyboard = new Button[KEYBOARD_SIZE];
+
+        for (int i = 0; i < KEYBOARD_SIZE; i++) {
+            keyboard[i] = findViewById(keyboardId[i]);
+            final int finalI = i;
+
+            keyboard[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sudoku.setValue(currentRow, currentColumn, finalI);
+                    cells[currentRow][currentColumn].setText(KEYBOARD_STRINGS[finalI]);
+                    onKeyPressed();
+                }
+            });
+        }
     }
 
     /**
@@ -280,11 +216,7 @@ public abstract class GridActivity extends Activity {
                 cells[i][j].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        unselectPrevious();
-                        currentX = i_x;
-                        currentY = j_y;
-                        selectCurrent();
-                        updateKeyBoard();
+                        setCurrentPosition(i_x, j_y);
                     }
                 });
             }
@@ -292,10 +224,28 @@ public abstract class GridActivity extends Activity {
     }
 
     /**
-     * updates the keyboard each time a cell is changed. Does animation to drop invalid keys.
+     * This method is the only interface exposed to child classes using which they can change
+     * position of the currently selected cell on the grid.
+     * This method deselects the previous cell, selects the new one and updates keyboard using
+     * animation.
+     *
+     * @param newX row index of the to be selected cell
+     * @param newY column index of the to be selected cell
      */
-    protected void updateKeyBoard() {
-        HashSet<Integer> toRemove = new HashSet<>(Arrays.asList(sudoku.buttonsNotAvailable(currentX, currentY)));
+    protected void setCurrentPosition(int newX, int newY) {
+        cells[currentRow][currentColumn].setBackground(getDrawable(R.drawable.unselected_cell));
+        currentRow = newX;
+        currentColumn = newY;
+        cells[currentRow][currentColumn].setBackground(getDrawable(R.drawable.selected_cell));
+        updateKeyBoard();
+    }
+
+    /**
+     * Updates the keyboard each time a cell is changed. Does animation to cleanly show visible and
+     * invisible cells
+     */
+    private void updateKeyBoard() {
+        HashSet<Integer> toRemove = new HashSet<>(Arrays.asList(sudoku.buttonsNotAvailable(currentRow, currentColumn)));
         for (int i = 0; i < KEYBOARD_SIZE; i++) {
             if (keyboardVisible[i] && toRemove.contains(i)) {
                 YoYo.with(Techniques.FadeOut)
@@ -318,50 +268,27 @@ public abstract class GridActivity extends Activity {
     }
 
     /**
-     * Makes the current cell look "selected" by changing the background
-     */
-    protected void selectCurrent() {
-        cells[currentX][currentY].setBackground(getDrawable(R.drawable.selected_cell));
-    }
-
-    /**
-     * Unselects the previous cell by changing background
-     */
-    private void unselectPrevious() {
-        cells[currentX][currentY].setBackground(getDrawable(R.drawable.unselected_cell));
-    }
-
-    /**
-     * Initialises other UI elements.
-     */
-    private void initialiseElements() {
-        keyboardVisible = new boolean[KEYBOARD_SIZE];
-        Arrays.fill(keyboardVisible, true);
-        positiveButton = findViewById(R.id.positive);
-        negativeButton = findViewById(R.id.negative);
-        currentX = 0;
-        currentY = 0;
-    }
-
-    /**
-     * Resets the background to unselected cells without text.
+     * Resets the background to unselected cells without text. Also makes all cells "selectable".
      */
     protected void resetBackground() {
         for (int x = 0; x < Sudoku.DIMENSION; x++) {
             for (int y = 0; y < Sudoku.DIMENSION; y++) {
                 cells[x][y].setBackground(getDrawable(R.drawable.unselected_cell));
+                cells[x][y].setClickable(true);
+                cells[x][y].setText(KEYBOARD_STRINGS[0]);
             }
         }
     }
 
     /**
-     * Makes the entered numbers background grey in colour.
+     * Sets the board with one cell selected and the keyboard updated for that cell.
      */
-    protected void makeFeedGrey() {
+    protected void setStartPosition() {
         for (int x = 0; x < Sudoku.DIMENSION; x++) {
             for (int y = 0; y < Sudoku.DIMENSION; y++) {
-                if (sudoku.getCell(x, y) != Sudoku.EMPTY_VALUE) {
-                    cells[x][y].setBackground(getDrawable(R.drawable.filled_cell));
+                if (sudoku.getValue(x, y) == Sudoku.EMPTY_VALUE) {
+                    setCurrentPosition(x, y);
+                    return;
                 }
             }
         }
@@ -373,9 +300,31 @@ public abstract class GridActivity extends Activity {
     protected void fillGrid() {
         for (int x = 0; x < Sudoku.DIMENSION; x++) {
             for (int y = 0; y < Sudoku.DIMENSION; y++) {
-                cells[x][y].setText(sudoku.getCellString(x, y));
+                cells[x][y].setText(sudoku.toString(x, y));
             }
         }
+    }
+
+    /**
+     * Makes all the cells which are already filled "unselectable". Also gives them a grey background
+     * so its easier for users to infer.
+     */
+    protected void freezeGrid() {
+        for (int x = 0; x < Sudoku.DIMENSION; x++) {
+            for (int y = 0; y < Sudoku.DIMENSION; y++) {
+                if (sudoku.getValue(x, y) != Sudoku.EMPTY_VALUE) {
+                    cells[x][y].setBackground(getDrawable(R.drawable.filled_cell));
+                    cells[x][y].setClickable(false);
+                }
+            }
+        }
+    }
+
+    /**
+     * Callback function to handle an event of a button being pressed
+     */
+    protected void onKeyPressed() {
+        updateKeyBoard();
     }
 
     // abstract methods

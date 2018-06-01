@@ -11,7 +11,7 @@ import com.ayush.playsoduko.playsoduko.R;
 import com.ayush.playsoduko.playsoduko.firebase_objects.Player;
 import com.ayush.playsoduko.playsoduko.firebase_objects.SerializedSudoku;
 import com.ayush.playsoduko.playsoduko.storyboard.HomeActivity;
-import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
+import com.ayush.playsoduko.playsoduko.utilities.SudokuBoard;
 import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
 import com.facebook.Profile;
 import com.google.firebase.database.DataSnapshot;
@@ -22,16 +22,16 @@ import com.google.firebase.database.ValueEventListener;
 
 /**
  * This activity represents the interface where the user can play online against another opponent.
- * This activity extends PlayLocalActivity which in turn extends GridActivity which describes a
+ * This activity extends SinglePlayerGame which in turn extends SudokuBoard which describes a
  * "Generic" Sudoku interface used in this app. I have removed and modified elements from it so it
  * suits the purpose.
  *
  * @author ayushranjan
- * @see GridActivity
- * @see PlayLocalActivity
+ * @see SudokuBoard
+ * @see SinglePlayerGame
  * @since 25/04/17.
  */
-public class PlayOnlineActivity extends PlayLocalActivity {
+public class PlayOnlineActivity extends SinglePlayerGame {
 
     public static final String PROGRESS_DIALOG_TITLE = "Finding Opponent";
     public static final String PROGRESS_DIALOG_MESSAGE = "Please wait...";
@@ -98,7 +98,7 @@ public class PlayOnlineActivity extends PlayLocalActivity {
             waitingForOpponentDialog.show();
             myReference.child(OPPONENT_ID).addValueEventListener(waitingForOpponentListener);
         } else {
-            sudoku = new Sudoku(numOfCellDrop);
+            sudoku = new Sudoku(cellsToDrop);
             playersReference.child(myself.getOpponentId()).child(OPPONENT_ID).setValue(myself.getId());
             myReference.child(SUDOKU_GRID).setValue(new SerializedSudoku(sudoku));
             startGame();
@@ -107,11 +107,12 @@ public class PlayOnlineActivity extends PlayLocalActivity {
 
     @Override
     protected void onKeyPressed() {
+        super.onKeyPressed();
         updateMyNumLeft();
     }
 
     @Override
-    protected void initSudokuBoard() {
+    protected void startNewGame() {
         // do nothing here
     }
 
@@ -146,9 +147,7 @@ public class PlayOnlineActivity extends PlayLocalActivity {
     /**
      * Calls the hierarchy of initialise methods and sets ups all fields correctly
      */
-    @Override
-    protected void initialiseComponents() {
-        super.initialiseComponents();
+    private void initialiseComponents() {
         ownNumLeft = findViewById(R.id.own_num_left);
         otherNumLeft = findViewById(R.id.other_num_left);
         myProfile = Profile.getCurrentProfile();
@@ -232,6 +231,7 @@ public class PlayOnlineActivity extends PlayLocalActivity {
                     sudoku = new Sudoku(serializedSudoku);
                     waitingForOpponentDialog.cancel();
                     availableUsersReference.child(myself.getId()).setValue(null);
+
                     startGame();
                 }
             }
@@ -280,7 +280,7 @@ public class PlayOnlineActivity extends PlayLocalActivity {
     }
 
     @Override
-    protected void setButtonListeners() {
+    protected void setUpButtons() {
         negativeButton.setVisibility(View.INVISIBLE);
 
         positiveButton.setText("Quit");

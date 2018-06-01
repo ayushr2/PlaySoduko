@@ -21,7 +21,7 @@
         <activity android:name=".storyboard.SolveActivity">
         </activity>
         <activity android:name=".storyboard.PlayActivity"/>
-        <activity android:name=".storyboard.play_mode.PlayLocalActivity"/>
+        <activity android:name=".storyboard.play_mode.SinglePlayerGame"/>
         <activity android:name=".storyboard.play_mode.PlayOnlineActivity"/>
     </application>
 

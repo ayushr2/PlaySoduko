@@ -77,7 +77,14 @@ public class Sudoku {
 
     // Public member functions
 
-    public void setSudoku(int x, int y, int value) {
+    /**
+     * Setter function which enables us to set values in the sudoku. One at a time
+     *
+     * @param x     x coordinate of grid
+     * @param y     y coordinate of grid
+     * @param value the value to update into the grid
+     */
+    public void setValue(int x, int y, int value) {
         int initialValue = grid[x][y];
         grid[x][y] = value;
         if (initialValue == 0) {
@@ -443,19 +450,6 @@ public class Sudoku {
         return possibilitiesOfRow;
     }
 
-    // setters
-
-    /**
-     * Setter function which enables us to set values in the sudoku. One at a time
-     *
-     * @param x   x coordinate of grid
-     * @param y   y coordinate of grid
-     * @param val the value to update into the grid
-     */
-    public void updateSudoku(int x, int y, int val) {
-        grid[x][y] = val;
-    }
-
     // getters
 
     /**
@@ -494,7 +488,7 @@ public class Sudoku {
      * @param y y coord of the cell
      * @return The string value of the value in that cell.
      */
-    public String getCellString(int x, int y) {
+    public String toString(int x, int y) {
         if (grid[x][y] == 0) {
             return "";
         } else {
@@ -509,7 +503,7 @@ public class Sudoku {
      * @param y y coord of the cell
      * @return int value held by that cell
      */
-    public int getCell(int x, int y) {
+    public int getValue(int x, int y) {
         return grid[x][y];
     }
 }

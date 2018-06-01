@@ -8,25 +8,26 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ayush.playsoduko.playsoduko.R;
-import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
+import com.ayush.playsoduko.playsoduko.utilities.SudokuBoard;
 import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
 
 /**
  * This activity represents the interface where the user can play locally. This activity extends
- * GridActivity which describes a "Generic" Sudoku interface used in this app. I have removed and
+ * SudokuBoard which describes a "Generic" Sudoku interface used in this app. I have removed and
  * modified elements from it so it suits the purpose.
  *
  * @author ayushranjan
- * @see GridActivity
+ * @see SudokuBoard
  * @since 20/04/17.
  */
-public class PlayLocalActivity extends GridActivity {
+public class SinglePlayerGame extends SudokuBoard {
     // instance variables
     protected TextView timerTextView;
+    protected int cellsToDrop;
+
+    private int difficulty;
+    private int gameDuration;
     private CountDownTimer countDownTimer;
-    protected int difficulty;
-    protected int seconds;
-    protected int numOfCellDrop;
 
     /**
      * This method initialises all UI elements and sets the correct button listeners. Makes all the
@@ -37,37 +38,32 @@ public class PlayLocalActivity extends GridActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initialiseComponents();
+        startNewGame();
     }
 
-    @Override
-    protected void initialiseComponents() {
-        super.initialiseComponents();
-        positiveButton.setText(R.string.new_game);
-        negativeButton.setText(R.string.quit);
-
+    /**
+     * Initialises UI components and sets up on click listeners
+     */
+    private void initialiseComponents() {
         timerTextView = findViewById(R.id.timer);
-        difficulty = getIntent().getIntExtra(GridActivity.DIFFICULTY_TAG, 3);
-        analyseDifficulty(difficulty);
+        setDifficulty(getIntent().getIntExtra(SudokuBoard.DIFFICULTY_TAG, 3));
 
-        initSudokuBoard();
-        setButtonListeners();
-    }
-
-    @Override
-    protected void onKeyPressed() {
-        // do nothing here
+        setUpButtons();
     }
 
     /**
      * Sets appropriate Button listeners. Have made this a method so that its child class can
      * override it.
      */
-    protected void setButtonListeners() {
+    protected void setUpButtons() {
+        positiveButton.setText(R.string.new_game);
+        negativeButton.setText(R.string.quit);
+
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetBackground();
-                initSudokuBoard();
+                startNewGame();
             }
         });
 
@@ -91,10 +87,8 @@ public class PlayLocalActivity extends GridActivity {
             builder.setPositiveButton("Next Game", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    difficulty++;
-                    analyseDifficulty(difficulty);
-                    resetBackground();
-                    initSudokuBoard();
+                    setDifficulty(++difficulty);
+                    startNewGame();
                     dialog.cancel();
                 }
             });
@@ -122,8 +116,7 @@ public class PlayLocalActivity extends GridActivity {
         builder.setPositiveButton("New Game", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                resetBackground();
-                initSudokuBoard();
+                startNewGame();
                 dialog.cancel();
             }
         });
@@ -140,61 +133,33 @@ public class PlayLocalActivity extends GridActivity {
     }
 
     /**
-     * Resets the background to unselected cells without text. Also makes all cells "selectable".
+     * Starts a new game with a newly generated Sudoku board
      */
-    @Override
-    protected void resetBackground() {
-        for (int x = 0; x < Sudoku.DIMENSION; x++) {
-            for (int y = 0; y < Sudoku.DIMENSION; y++) {
-                cells[x][y].setBackground(getDrawable(R.drawable.unselected_cell));
-                cells[x][y].setClickable(true);
-            }
-        }
-    }
-
-    /**
-     * Helper functions which calls a bunch of helper functions which refreshes the whole game.
-     */
-    protected void initSudokuBoard() {
-        sudoku = new Sudoku(numOfCellDrop);
-        startTimer(seconds);
+    protected void startNewGame() {
+        sudoku = new Sudoku(cellsToDrop);
         startGame();
     }
 
+    /**
+     * Starts the game with the given sudoku board
+     */
     protected void startGame() {
+        resetBackground();
+        setStartPosition();
         fillGrid();
-        immutateFeed();
-        setCurrentXY();
-        updateKeyBoard();
+        freezeGrid();
+        startTimer();
     }
 
     /**
-     * Selects the first empty cell as the starting point in the game.
+     * Starts the timer text view with the input gameDuration.
      */
-    protected void setCurrentXY() {
-        for (int i = 0; i < Sudoku.DIMENSION; i++) {
-            for (int j = 0; j < Sudoku.DIMENSION; j++) {
-                if (sudoku.getCell(i, j) == 0) {
-                    currentX = i;
-                    currentY = j;
-                    selectCurrent();
-                    return;
-                }
-            }
-        }
-    }
-
-    /**
-     * Starts the timer text view with the input seconds.
-     *
-     * @param seconds the number of seconds the timer is supposed to start with
-     */
-    protected void startTimer(long seconds) {
+    protected void startTimer() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
 
-        countDownTimer = new CountDownTimer(seconds * COUNT_DOWN_INTERVAL, COUNT_DOWN_INTERVAL) {
+        countDownTimer = new CountDownTimer(gameDuration * COUNT_DOWN_INTERVAL, COUNT_DOWN_INTERVAL) {
 
             public void onTick(long millisUntilFinished) {
                 long seconds = (millisUntilFinished / 1000);
@@ -214,50 +179,37 @@ public class PlayLocalActivity extends GridActivity {
     }
 
     /**
-     * Makes all the cells which are already filled "unselectable". Also gives them a grey background
-     * so its easier for users to infer.
-     */
-    protected void immutateFeed() {
-        for (int x = 0; x < Sudoku.DIMENSION; x++) {
-            for (int y = 0; y < Sudoku.DIMENSION; y++) {
-                if (sudoku.getCell(x, y) != Sudoku.EMPTY_VALUE) {
-                    cells[x][y].setBackground(getDrawable(R.drawable.filled_cell));
-                    cells[x][y].setClickable(false);
-                }
-            }
-        }
-    }
-
-    /**
      * Based on the difficulty value passed in, sets the timer and the number of cells to be dropped.
      *
-     * @param difficulty input difficulty value by the user through the previous activity.
+     * @param newDifficulty the new difficulty to set
      */
-    protected void analyseDifficulty(int difficulty) {
+    protected void setDifficulty(int newDifficulty) {
+        difficulty = newDifficulty;
+
         switch (difficulty) {
             case 1:
-                seconds = 2280;
-                numOfCellDrop = 36;
+                gameDuration = 2280;
+                cellsToDrop = 36;
                 break;
             case 2:
-                seconds = 2160;
-                numOfCellDrop = 36 + (int) (Math.random() * 5);
+                gameDuration = 2160;
+                cellsToDrop = 36 + (int) (Math.random() * 5);
                 break;
             case 3:
-                seconds = 2040;
-                numOfCellDrop = 41 + (int) (Math.random() * 4);
+                gameDuration = 2040;
+                cellsToDrop = 41 + (int) (Math.random() * 4);
                 break;
             case 4:
-                seconds = 1920;
-                numOfCellDrop = 45 + (int) (Math.random() * 3);
+                gameDuration = 1920;
+                cellsToDrop = 45 + (int) (Math.random() * 3);
                 break;
             case 5:
-                seconds = 1800;
-                numOfCellDrop = 48 + (int) (Math.random() * 3);
+                gameDuration = 1800;
+                cellsToDrop = 48 + (int) (Math.random() * 3);
                 break;
             default:
-                seconds = 1800;
-                numOfCellDrop = 40;
+                gameDuration = 1800;
+                cellsToDrop = 40;
                 break;
         }
     }

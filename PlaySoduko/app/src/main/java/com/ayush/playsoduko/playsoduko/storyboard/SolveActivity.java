@@ -4,20 +4,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
+import com.ayush.playsoduko.playsoduko.utilities.SudokuBoard;
 import com.ayush.playsoduko.playsoduko.R;
 import com.ayush.playsoduko.playsoduko.utilities.Sudoku;
 
 /**
  * This activity represents the interface where the user can enter numbers into an empty grid. This
- * activity extends GridActivity which describes a "Generic" Sudoku interface used in this app. I have
+ * activity extends SudokuBoard which describes a "Generic" Sudoku interface used in this app. I have
  * removed and modified elements from it so it suits the purpose.
  *
- * @see GridActivity
+ * @see SudokuBoard
  * @author ayushranjan
  * @since 13/04/17.
  */
-public class SolveActivity extends GridActivity {
+public class SolveActivity extends SudokuBoard {
 
     /**
      * This method initialises all UI elements and sets the correct button listeners. Makes all the
@@ -28,18 +28,23 @@ public class SolveActivity extends GridActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        positiveButton.setText(R.string.go);
-        negativeButton.setText(R.string.clear);
 
         // new empty sudoku
         sudoku = new Sudoku();
-        selectCurrent();
+        setUpButtons();
+    }
 
-        // button listeners
+    /**
+     * Sets up the button names and on click listeners to perform the required actions
+     */
+    private void setUpButtons() {
+        positiveButton.setText(R.string.go);
+        negativeButton.setText(R.string.clear);
+
         positiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeFeedGrey();
+                freezeGrid();
                 sudoku.solve();
                 if (sudoku.isSolved()) {
                     fillGrid();
@@ -61,10 +66,7 @@ public class SolveActivity extends GridActivity {
         });
     }
 
-    @Override
-    protected void onKeyPressed() {
-        // do nothing
-    }
+    // overridden methods
 
     @Override
     protected void showWinDialog() {

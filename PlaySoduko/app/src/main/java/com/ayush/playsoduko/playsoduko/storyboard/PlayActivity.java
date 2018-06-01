@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.ayush.playsoduko.playsoduko.utilities.GridActivity;
-import com.ayush.playsoduko.playsoduko.storyboard.play_mode.PlayLocalActivity;
+import com.ayush.playsoduko.playsoduko.storyboard.play_mode.SinglePlayerGame;
+import com.ayush.playsoduko.playsoduko.utilities.SudokuBoard;
 import com.ayush.playsoduko.playsoduko.storyboard.play_mode.PlayOnlineActivity;
 import com.ayush.playsoduko.playsoduko.R;
 
@@ -18,7 +18,7 @@ import com.ayush.playsoduko.playsoduko.R;
  * option of playing locally or online with an opponent.
  *
  * @author ayushranjan
- * @see PlayLocalActivity
+ * @see SinglePlayerGame
  * @since 30/10/16.
  */
 public class PlayActivity extends Activity {
@@ -54,8 +54,8 @@ public class PlayActivity extends Activity {
         localPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PlayLocalActivity.class);
-                intent.putExtra(GridActivity.DIFFICULTY_TAG, (difficultySeek.getProgress() + 1));
+                Intent intent = new Intent(getApplicationContext(), SinglePlayerGame.class);
+                intent.putExtra(SudokuBoard.DIFFICULTY_TAG, (difficultySeek.getProgress() + 1));
                 startActivity(intent);
             }
         });
@@ -65,7 +65,7 @@ public class PlayActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PlayOnlineActivity.class);
-                intent.putExtra(GridActivity.DIFFICULTY_TAG, (difficultySeek.getProgress() + 1) );
+                intent.putExtra(SudokuBoard.DIFFICULTY_TAG, (difficultySeek.getProgress() + 1) );
                 startActivity(intent);
             }
         });
