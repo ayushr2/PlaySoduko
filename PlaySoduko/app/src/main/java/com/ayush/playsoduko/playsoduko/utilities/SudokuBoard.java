@@ -271,11 +271,26 @@ public abstract class SudokuBoard extends Activity {
      * Resets the background to unselected cells without text. Also makes all cells "selectable".
      */
     protected void resetBackground() {
+        unfreezeGrid();
+        clearGridContent();
+    }
+
+    protected void clearGridContent() {
+        for (int x = 0; x < Sudoku.DIMENSION; x++) {
+            for (int y = 0; y < Sudoku.DIMENSION; y++) {
+                cells[x][y].setText(KEYBOARD_STRINGS[0]);
+            }
+        }
+    }
+
+    /**
+     * Unfreezes the grid and hence makes all cells clickable and unselected
+     */
+    protected void unfreezeGrid() {
         for (int x = 0; x < Sudoku.DIMENSION; x++) {
             for (int y = 0; y < Sudoku.DIMENSION; y++) {
                 cells[x][y].setBackground(getDrawable(R.drawable.unselected_cell));
                 cells[x][y].setClickable(true);
-                cells[x][y].setText(KEYBOARD_STRINGS[0]);
             }
         }
     }

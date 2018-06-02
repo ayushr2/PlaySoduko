@@ -49,7 +49,7 @@ public class SolveActivity extends SudokuBoard {
                 if (sudoku.isSolved()) {
                     fillGrid();
                 } else {
-                    resetBackground();
+                    unfreezeGrid();
                     Toast.makeText(getApplicationContext(), getString(R.string.no_solution),
                             Toast.LENGTH_SHORT).show();
                 }
@@ -61,7 +61,7 @@ public class SolveActivity extends SudokuBoard {
             public void onClick(View v) {
                 sudoku = new Sudoku();
                 resetBackground();
-                fillGrid();
+                setStartPosition();
             }
         });
     }
