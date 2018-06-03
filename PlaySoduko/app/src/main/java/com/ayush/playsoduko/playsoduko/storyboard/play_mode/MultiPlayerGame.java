@@ -185,6 +185,11 @@ public class MultiPlayerGame extends SinglePlayerGame {
         builder.show();
     }
 
+    @Override
+    protected void startTimer() {
+        // do not start timer
+    }
+
     private void checkForAvailablePlayers() {
         availableUsersReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
