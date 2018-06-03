@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".storyboard.PlayActivity"/>
         <activity android:name=".storyboard.play_mode.SinglePlayerGame"/>
-        <activity android:name=".storyboard.play_mode.PlayOnlineActivity"/>
+        <activity android:name=".storyboard.play_mode.MultiPlayerGame"/>
     </application>
 
 </manifest>

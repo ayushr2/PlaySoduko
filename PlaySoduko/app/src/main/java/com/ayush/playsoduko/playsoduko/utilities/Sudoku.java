@@ -176,12 +176,6 @@ public class Sudoku {
                                 !boxPossibilities.contains(current)) {
                             copy.grid[x][y] = current;
                             numberOfZeros--;
-                            if (!columnPossibilities.contains(current)) {
-                            } else {
-                                if (!rowPossibilities.contains(current)) {
-                                } else {
-                                }
-                            }
                             continue currentIteration;
                         }
                     }

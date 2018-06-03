@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ayush.playsoduko.playsoduko.storyboard.play_mode.SinglePlayerGame;
 import com.ayush.playsoduko.playsoduko.utilities.SudokuBoard;
-import com.ayush.playsoduko.playsoduko.storyboard.play_mode.PlayOnlineActivity;
+import com.ayush.playsoduko.playsoduko.storyboard.play_mode.MultiPlayerGame;
 import com.ayush.playsoduko.playsoduko.R;
 
 /**
@@ -64,7 +64,7 @@ public class PlayActivity extends Activity {
         onlinePLayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PlayOnlineActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MultiPlayerGame.class);
                 intent.putExtra(SudokuBoard.DIFFICULTY_TAG, (difficultySeek.getProgress() + 1) );
                 startActivity(intent);
             }

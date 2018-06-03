@@ -18,7 +18,7 @@
     <string name="quit">quit</string>
     <string name="choose_difficulty">Choose Difficulty</string>
     <string name="lost_message">Sorry! You lost the game because you ran out of time.</string>
-    <string name="lost_message_online">Sorry! You lost the game because your opponent completed the puzzle before you.</string>
+    <string name="lost_message_online">Sorry! You lost the game because your opponent completed the sudoku before you.</string>
     <string name="opponent_quit_message">Congratulations! You won the game! Your opponent quit.</string>
     <string name="won_message">Congratulations! You won the game!</string>
     <string name="profile_picture_tag">profile picture</string>

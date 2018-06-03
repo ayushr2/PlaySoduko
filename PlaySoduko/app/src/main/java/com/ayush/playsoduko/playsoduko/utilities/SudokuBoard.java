@@ -192,6 +192,9 @@ public abstract class SudokuBoard extends Activity {
             keyboard[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (sudoku == null)
+                        return;
+
                     sudoku.setValue(currentRow, currentColumn, finalI);
                     cells[currentRow][currentColumn].setText(KEYBOARD_STRINGS[finalI]);
                     onKeyPressed();
@@ -275,6 +278,9 @@ public abstract class SudokuBoard extends Activity {
         clearGridContent();
     }
 
+    /**
+     * Clears out the text in every cell.
+     */
     protected void clearGridContent() {
         for (int x = 0; x < Sudoku.DIMENSION; x++) {
             for (int y = 0; y < Sudoku.DIMENSION; y++) {
