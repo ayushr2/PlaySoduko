@@ -62,7 +62,7 @@ public class MultiPlayerGame extends SinglePlayerGame {
     // listeners
     // before game starts
     private ValueEventListener waitingForOpponentListener;
-    private ValueEventListener readSudokuGridListener;
+    private ValueEventListener readSudokuBoardListener;
 
     // after game starts
     private ValueEventListener opponentNumCellsLeftChangeListener;
@@ -159,7 +159,6 @@ public class MultiPlayerGame extends SinglePlayerGame {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                cleanGameListeners();
                 finish();
             }
         });
@@ -176,7 +175,6 @@ public class MultiPlayerGame extends SinglePlayerGame {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                cleanGameListeners();
                 finish();
             }
         });
@@ -249,7 +247,6 @@ public class MultiPlayerGame extends SinglePlayerGame {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        cleanBeforeGameListeners();
                         dialog.cancel();
                         finish();
                     }
@@ -262,8 +259,6 @@ public class MultiPlayerGame extends SinglePlayerGame {
         quitDialog.setPositiveButton(HomeActivity.POSITIVE_TAG, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                opponentReference.child(OPPONENT_ID).setValue(null);
-                cleanListeners();
                 finish();
             }
         });
@@ -280,23 +275,24 @@ public class MultiPlayerGame extends SinglePlayerGame {
         opponentQuitDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                cleanGameListeners();
                 finish();
             }
         });
         opponentQuitDialog.setCancelable(false);
     }
 
-    private void cleanListeners() {
+    private void cleanUp() {
         availableUsersReference.child(myself.getId()).setValue(null);
 
-        if (inSession)
-            cleanGameListeners();
-        else
-            cleanBeforeGameListeners();
+        if (inSession) {
+            opponentReference.child(OPPONENT_ID).setValue(null);
+            cleanInGameMode();
+            inSession = false;
+        } else
+            cleanInWaitMode();
     }
 
-    private void cleanGameListeners() {
+    private void cleanInGameMode() {
         opponentReference.child(CELLS_LEFT).removeEventListener(opponentNumCellsLeftChangeListener);
         myReference.child(OPPONENT_ID).removeEventListener(opponentQuitListener);
     }
@@ -309,8 +305,8 @@ public class MultiPlayerGame extends SinglePlayerGame {
                 String opponentId = dataSnapshot.getValue(String.class);
                 if (opponentId != null) {
                     opponentFoundHandler(opponentId);
-                    cleanBeforeGameListeners();
-                    opponentReference.child(SUDOKU_GRID).addValueEventListener(readSudokuGridListener);
+                    cleanInWaitMode();
+                    opponentReference.child(SUDOKU_GRID).addValueEventListener(readSudokuBoardListener);
                 }
             }
 
@@ -320,12 +316,12 @@ public class MultiPlayerGame extends SinglePlayerGame {
             }
         };
 
-        readSudokuGridListener = new ValueEventListener() {
+        readSudokuBoardListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 SerializedSudoku serializedSudoku = dataSnapshot.getValue(SerializedSudoku.class);
                 if (serializedSudoku != null) {
-                    opponentReference.child(SUDOKU_GRID).removeEventListener(readSudokuGridListener);
+                    opponentReference.child(SUDOKU_GRID).removeEventListener(readSudokuBoardListener);
                     sudoku = new Sudoku(serializedSudoku);
                     waitingForOpponentDialog.cancel();
                     startGame();
@@ -369,7 +365,7 @@ public class MultiPlayerGame extends SinglePlayerGame {
         };
     }
 
-    private void cleanBeforeGameListeners() {
+    private void cleanInWaitMode() {
         availableUsersReference.child(myself.getId()).setValue(null);
         myReference.child(OPPONENT_ID).removeEventListener(waitingForOpponentListener);
     }
@@ -390,9 +386,10 @@ public class MultiPlayerGame extends SinglePlayerGame {
         quitDialog.show();
     }
 
+
     @Override
     protected void onDestroy() {
+        cleanUp();
         super.onDestroy();
-        cleanListeners();
     }
 }
