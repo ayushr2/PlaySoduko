@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ayush.playsoduko.playsoduko.R;
@@ -42,7 +41,6 @@ public class HomeActivity extends Activity {
     private Button playButton;
     private Button solveButton;
     private Button logOutButton;
-    private TextView welcomeView;
     private Intent intentPlay;
     private Intent intentSolve;
     // private ProfilePictureView profilePictureView;
@@ -139,7 +137,6 @@ public class HomeActivity extends Activity {
         playButton = findViewById(R.id.playButton);
         solveButton = findViewById(R.id.solveButton);
         logOutButton = findViewById(R.id.log_out_button);
-        welcomeView = findViewById(R.id.user_name);
         profilePictureView = findViewById(R.id.profile_picture);
 
         // Checks if the profile is changed and hence current profile is null. If so updates the profile
@@ -162,7 +159,6 @@ public class HomeActivity extends Activity {
     }
 
     private void updateUiForCurrentUser(Profile currentProfile) {
-        welcomeView.setText(WELCOME_TAG + currentProfile.getName());
         Picasso.with(getApplicationContext()).load(currentProfile.getProfilePictureUri(120, 120))
                 .transform(new CircleTransformation())
                 .into(profilePictureView);
@@ -195,15 +191,10 @@ public class HomeActivity extends Activity {
      * This helper function uses the library to call animation on the logo elements.
      */
     private void animateLogo() {
-        YoYo.with(Techniques.BounceInLeft)
+        YoYo.with(Techniques.FadeIn)
                 .duration(2500)
                 .repeat(1)
                 .playOn(findViewById(R.id.logo_first_home));
-
-        YoYo.with(Techniques.BounceInRight)
-                .duration(2500)
-                .repeat(1)
-                .playOn(findViewById(R.id.logo_second_home));
     }
 
     /**

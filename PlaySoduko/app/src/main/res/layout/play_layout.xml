@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/play_back"
+    android:background="@drawable/play_background"
     android:weightSum="4">
     <TextView
         android:layout_width="match_parent"
@@ -51,18 +51,20 @@
             android:layout_height="match_parent"
             android:background="@color/transparent"
             android:textColor="@color/white"
+            android:textAllCaps="false"
             android:textSize="35sp"
             android:id="@+id/play_locally_button"
             android:layout_weight="1"
-            android:text="Play Locally"/>
+            android:text="@string/play_local_btn_txt"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/transparent"
             android:textColor="@color/white"
             android:textSize="35sp"
+            android:textAllCaps="false"
             android:id="@+id/play_online_button"
             android:layout_weight="1"
-            android:text="Play online"/>
+            android:text="@string/play_online_btn_txt"/>
     </LinearLayout>
 </LinearLayout>

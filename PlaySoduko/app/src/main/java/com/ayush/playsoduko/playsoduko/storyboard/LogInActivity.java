@@ -88,15 +88,10 @@ public class LogInActivity extends Activity {
      * This uses the library to call animation on the logo elements to make it look cool!
      */
     private void animateLogo() {
-        YoYo.with(Techniques.BounceInLeft)
+        YoYo.with(Techniques.FadeIn)
                 .duration(2500)
                 .repeat(1)
                 .playOn(findViewById(R.id.logo_first_login));
-
-        YoYo.with(Techniques.BounceInRight)
-                .duration(2500)
-                .repeat(1)
-                .playOn(findViewById(R.id.logo_second_login));
     }
 
     /**

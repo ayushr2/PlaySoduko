@@ -1,94 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/cool2"
     android:gravity="center_horizontal"
-    android:weightSum="6">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="10"
-        android:layout_weight="2.6">
-        <!--<com.airbnb.lottie.LottieAnimationView-->
-            <!--android:id="@+id/logout_button_anim"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="4"-->
+    android:orientation="vertical">
 
-            <!--app:lottie_fileName="logout.json"-->
-            <!--app:lottie_loop="true"-->
-            <!--app:lottie_autoPlay="true"/>-->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:background="@drawable/background_log_out"
-            android:id="@+id/log_out_button"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="25sp"
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:id="@+id/user_name"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="@string/welcome_deafult"/>
-        <ImageView
-            android:id="@+id/profile_picture"
-            android:layout_width="match_parent"
-            android:layout_weight="4"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/profile_picture_tag" />
-        <!--<com.facebook.login.widget.ProfilePictureView-->
-            <!--android:id="@+id/profile_picture"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_weight="4"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_centerInParent="true"/>-->
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.7"
-        android:orientation="vertical"
-        android:gravity="center">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/logo_first_home"
-            android:background="@drawable/play_logo"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/logo_second_home"
-            android:background="@drawable/soduko_logo"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_weight="1.7">
-        <Button
-            android:layout_width="123dp"
-            android:layout_height="106dp"
-            android:textColor="@color/white"
-            android:background="@drawable/main_button_background"
-            android:text="@string/play"
-            android:id="@+id/playButton" />
-        <Button
-            android:layout_width="123dp"
-            android:layout_height="106dp"
-            android:textColor="@color/white"
-            android:background="@drawable/main_button_background"
-            android:text="@string/solve"
-            android:id="@+id/solveButton"/>
-    </LinearLayout>
-</LinearLayout>
+    <!--<com.airbnb.lottie.LottieAnimationView-->
+    <!--android:id="@+id/logout_button_anim"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="4"-->
+
+    <!--app:lottie_fileName="logout.json"-->
+    <!--app:lottie_loop="true"-->
+    <!--app:lottie_autoPlay="true"/>-->
+    <Button
+        android:id="@+id/log_out_button"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_log_out"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="73dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/profile_picture_tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/logo_first_home"
+        android:layout_width="219dp"
+        android:layout_height="122dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="104dp"
+        android:background="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/playButton"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:layout_marginBottom="68dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/main_button_background"
+        android:text="@string/play"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/solveButton"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
+        android:layout_marginBottom="68dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/main_button_background"
+        android:text="@string/solve"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

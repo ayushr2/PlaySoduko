@@ -34,6 +34,7 @@ dependencies {
     }
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     api 'com.facebook.android:facebook-android-sdk:4.31.0'
     api 'com.squareup.picasso:picasso:2.5.2' // Picasso Library
     api 'com.daimajia.easing:library:2.0@aar'

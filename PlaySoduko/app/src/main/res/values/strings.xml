@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Play Sudoku</string>
+    <string name="app_name">Sudoku</string>
     <string name="facebook_app_id">205548869936618</string>
     <string name="keystore">ga0RGNYHvNM5d0SLGQfpQWAPGJ8=</string>
     <string name="success_log_in">Login Successful!</string>
@@ -22,4 +22,6 @@
     <string name="opponent_quit_message">Congratulations! You won the game! Your opponent quit.</string>
     <string name="won_message">Congratulations! You won the game!</string>
     <string name="profile_picture_tag">profile picture</string>
+    <string name="play_local_btn_txt">Single Player</string>
+    <string name="play_online_btn_txt">Multi Player</string>
 </resources>
