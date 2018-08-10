@@ -33,6 +33,17 @@ public class PlayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_layout);
         initElements();
+    }
+
+    private void initElements() {
+        difficultySeek = findViewById(R.id.difficulty_seek_bar);
+        difficultyText = findViewById(R.id.seek_bar_text_view);
+        localPlayButton = findViewById(R.id.play_locally_button);
+        onlinePLayButton = findViewById(R.id.play_online_button);
+
+        // set default value on seek bar
+        difficultySeek.setProgress(2);
+        difficultyText.setText(String.format("%d/%d", 3, MAX_DIFFICULTY));
 
         difficultySeek.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -69,13 +80,6 @@ public class PlayActivity extends Activity {
                 startActivity(intent);
             }
         });
-    }
-
-    private void initElements() {
-        difficultySeek = findViewById(R.id.difficulty_seek_bar);
-        difficultyText = findViewById(R.id.seek_bar_text_view);
-        localPlayButton = findViewById(R.id.play_locally_button);
-        onlinePLayButton = findViewById(R.id.play_online_button);
     }
 
     public void onBackPressed() {
