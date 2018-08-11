@@ -192,7 +192,7 @@ public class HomeActivity extends Activity {
      */
     private void animateLogo() {
         YoYo.with(Techniques.FadeIn)
-                .duration(2500)
+                .duration(1500)
                 .repeat(1)
                 .playOn(findViewById(R.id.logo_first_home));
     }
