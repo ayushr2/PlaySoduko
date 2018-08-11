@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.ayush.playsoduko.playsoduko.R;
 import com.ayush.playsoduko.playsoduko.utilities.CircleTransformation;
 import com.daimajia.androidanimations.library.Techniques;
@@ -38,8 +39,8 @@ public class HomeActivity extends Activity {
     public static final String NEGATIVE_TAG = "No";
     public static final String CANCEL_TAG = "Cancel";
     public static final String WELCOME_TAG = "Welcome ";
-    private Button playButton;
-    private Button solveButton;
+    private LottieAnimationView playButton;
+    private LottieAnimationView solveButton;
     private Button logOutButton;
     private Intent intentPlay;
     private Intent intentSolve;
@@ -134,8 +135,8 @@ public class HomeActivity extends Activity {
      * changed because the Profile is loaded asynchronously so it returns null right after log in.
      */
     private void initComponents() {
-        playButton = findViewById(R.id.playButton);
-        solveButton = findViewById(R.id.solveButton);
+        playButton = findViewById(R.id.play_animation);
+        solveButton = findViewById(R.id.solve_animation);
         logOutButton = findViewById(R.id.log_out_button);
         profilePictureView = findViewById(R.id.profile_picture);
 
@@ -201,15 +202,7 @@ public class HomeActivity extends Activity {
      * This helper function uses the library to call animation on the button elements.
      */
     private void animateButtons() {
-        YoYo.with(Techniques.Pulse)
-                .duration(1000)
-                .repeat(1)
-                .playOn(playButton);
-
-        YoYo.with(Techniques.Pulse)
-                .duration(1000)
-                .repeat(1)
-                .playOn(solveButton);
+        playButton.playAnimation();
     }
 
     /**

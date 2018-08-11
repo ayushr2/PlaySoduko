@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,15 +8,6 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <!--<com.airbnb.lottie.LottieAnimationView-->
-    <!--android:id="@+id/logout_button_anim"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_weight="4"-->
-
-    <!--app:lottie_fileName="logout.json"-->
-    <!--app:lottie_loop="true"-->
-    <!--app:lottie_autoPlay="true"/>-->
     <Button
         android:id="@+id/log_out_button"
         android:layout_width="52dp"
@@ -54,25 +44,51 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <Button
-        android:id="@+id/playButton"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/solve_animation"
+        android:layout_width="166dp"
+        android:layout_height="148dp"
         android:layout_marginBottom="68dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lego_loader.json"
+        app:lottie_loop="true" />
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/play_animation"
+        android:layout_width="117dp"
+        android:layout_height="118dp"
+        android:layout_marginBottom="100dp"
         android:layout_marginStart="40dp"
-        android:background="@drawable/main_button_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="playing.json" />
+
+
+    <Button
+        android:id="@+id/play_label"
+        android:layout_width="73dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="68dp"
+        android:layout_marginStart="60dp"
+        android:background="@color/transparent"
         android:text="@string/play"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
-        android:id="@+id/solveButton"
-        android:layout_width="115dp"
-        android:layout_height="115dp"
+        android:id="@+id/solve_label"
+        android:layout_width="73dp"
+        android:layout_height="41dp"
         android:layout_marginBottom="68dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/main_button_background"
+        android:layout_marginEnd="60dp"
+        android:background="@color/transparent"
         android:text="@string/solve"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
